@@ -1,6 +1,6 @@
 ﻿namespace MCrypt.UI
 {
-    partial class FileBrowserUI
+    partial class FileBrowserForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FileBrowserUI));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FileBrowserForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,8 +40,8 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.aboutLink = new System.Windows.Forms.LinkLabel();
             this.btnBrowseFile = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnBrowseDirectory = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,7 +86,7 @@
             "Decrypt"});
             this.comboBoxMode.Location = new System.Drawing.Point(41, 155);
             this.comboBoxMode.Name = "comboBoxMode";
-            this.comboBoxMode.Size = new System.Drawing.Size(111, 21);
+            this.comboBoxMode.Size = new System.Drawing.Size(89, 21);
             this.comboBoxMode.TabIndex = 2;
             this.toolTip1.SetToolTip(this.comboBoxMode, "Select the crypt mode for the file you want to compute.");
             // 
@@ -105,14 +105,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFileName.Location = new System.Drawing.Point(41, 71);
             this.txtFileName.Name = "txtFileName";
-            this.txtFileName.Size = new System.Drawing.Size(344, 22);
+            this.txtFileName.Size = new System.Drawing.Size(361, 22);
             this.txtFileName.TabIndex = 0;
             this.txtFileName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtFileName_MouseDoubleClick);
             // 
             // btnStart
             // 
             this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStart.Location = new System.Drawing.Point(298, 150);
+            this.btnStart.Location = new System.Drawing.Point(315, 150);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(87, 29);
             this.btnStart.TabIndex = 3;
@@ -127,7 +127,7 @@
             this.aboutLink.AutoSize = true;
             this.aboutLink.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
             this.aboutLink.LinkColor = System.Drawing.Color.RoyalBlue;
-            this.aboutLink.Location = new System.Drawing.Point(373, 9);
+            this.aboutLink.Location = new System.Drawing.Point(390, 9);
             this.aboutLink.Name = "aboutLink";
             this.aboutLink.Size = new System.Drawing.Size(12, 13);
             this.aboutLink.TabIndex = 4;
@@ -150,16 +150,6 @@
             this.btnBrowseFile.UseVisualStyleBackColor = true;
             this.btnBrowseFile.Click += new System.EventHandler(this.btnBrowseFile_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::MCrypt.Properties.Resources.search20;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 55);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(20, 20);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox1.TabIndex = 10;
-            this.pictureBox1.TabStop = false;
-            // 
             // btnBrowseDirectory
             // 
             this.btnBrowseDirectory.Image = global::MCrypt.Properties.Resources.folder20;
@@ -174,14 +164,24 @@
             this.btnBrowseDirectory.UseVisualStyleBackColor = true;
             this.btnBrowseDirectory.Click += new System.EventHandler(this.btnBrowseDirectory_Click);
             // 
-            // FileBrowserUI
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::MCrypt.Properties.Resources.search20;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 55);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
+            // 
+            // FileBrowserForm
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(397, 191);
+            this.ClientSize = new System.Drawing.Size(414, 191);
             this.Controls.Add(this.btnBrowseDirectory);
             this.Controls.Add(this.aboutLink);
             this.Controls.Add(this.pictureBox1);
@@ -195,11 +195,11 @@
             this.Controls.Add(this.label1);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(9000, 230);
             this.MinimizeBox = false;
-            this.Name = "FileBrowserUI";
+            this.Name = "FileBrowserForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MCrypt";
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.FileBrowserUI_DragDrop);

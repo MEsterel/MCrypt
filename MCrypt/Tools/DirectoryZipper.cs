@@ -10,54 +10,18 @@ namespace MCrypt.Tools
 {
     public static class DirectoryZipper
     {
-        public static void ZipDirectory(string sourcePath, string outputPath, bool addMCryptSignature = true)
+        public static void Zip(string sourcePath, string outputPath)
         {
             if (File.Exists(outputPath)) // If output path already exists, delete it or error
             {
                 File.Delete(outputPath);
             }
 
-            ZipFile.CreateFromDirectory(sourcePath, outputPath, CompressionLevel.Fastest, true);
-
-            if (addMCryptSignature) // add MCrypt Signature
-            {
-                using (ZipArchive archive = ZipFile.Open(outputPath, ZipArchiveMode.Update))
-                {
-                    archive.CreateEntry("_MCrypt.signature", CompressionLevel.Fastest);
-                }
-            }
+            ZipFile.CreateFromDirectory(sourcePath, outputPath, CompressionLevel.NoCompression, false); // No compression to be as fast as possible (first goal of MCrypt).
         }
 
-        public static bool IsArchiveFromMCrpyt(string archivePath)
+        public static void Unzip(string archivePath, string outputPath)
         {
-            using (ZipArchive archive = ZipFile.Open(archivePath, ZipArchiveMode.Read))
-            {
-                foreach (ZipArchiveEntry entry in archive.Entries)
-                {
-                    if (entry.Name == "_MCrypt.signature")
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
-
-        public static void UnzipMCryptArchive(string archivePath, string outputPath)
-        {
-            // Delete MCrypt Signature
-            using (ZipArchive archive = ZipFile.Open(archivePath, ZipArchiveMode.Update))
-            {
-                foreach (ZipArchiveEntry entry in archive.Entries)
-                {
-                    if (entry.Name == "_MCrypt.signature")
-                    {
-                        entry.Delete();
-                    }
-                }
-            }
-
             ZipFile.ExtractToDirectory(archivePath, outputPath);
         }
     }

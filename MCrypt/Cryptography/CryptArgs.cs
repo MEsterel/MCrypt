@@ -1,20 +1,21 @@
-﻿namespace MCrypt.Exceptions
+﻿namespace MCrypt.Cryptography
 {
     public class CryptArgs
     {
-        public string InputFilePath { get; private set; }
+        public string InputPath { get; private set; }
         
-        public string OutputFilePath { get; private set; }
+        public string OutputPath { get; private set; }
         
         public string Password { get; private set; }
 
-        //public bool IsArchive { get; private set; }
+        public bool IsDirectory { get; private set; }
 
-        public CryptArgs(string inputFilePath, string outputFilePath, string password)
+        public CryptArgs(string inputPath, string outputPath, string password, bool isDirectory = false)
         {
-            this.InputFilePath = inputFilePath;
-            this.OutputFilePath = outputFilePath;
+            this.InputPath = inputPath;
+            this.OutputPath = outputPath;
             this.Password = password;
+            this.IsDirectory = isDirectory;
         }
     }
 }

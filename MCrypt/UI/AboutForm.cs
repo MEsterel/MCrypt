@@ -12,9 +12,9 @@ using System.Diagnostics;
 
 namespace MCrypt.UI
 {
-    public partial class AboutUI : Form
+    public partial class AboutForm : Form
     {
-        public AboutUI()
+        public AboutForm()
         {
             InitializeComponent();
             

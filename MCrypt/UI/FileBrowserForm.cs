@@ -9,16 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using MCrypt.Tools;
-using MCrypt.Utils;
+using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Runtime.Remoting.Contexts;
+using MCrypt.Cryptography;
 
 namespace MCrypt.UI
 {
-    public partial class FileBrowserUI : Form
+    public partial class FileBrowserForm : Form
     {
-        public string path;
-        public CryptMode mode;
+        public string Path { get; set; }
+        public CryptMode Mode { get; set; }
 
-        public FileBrowserUI()
+        public FileBrowserForm()
         {
             InitializeComponent();
 
@@ -35,12 +37,12 @@ namespace MCrypt.UI
             }
 
             // Save path
-            path = txtFileName.Text;
+            Path = txtFileName.Text;
 
             // Check if path valid
             try
             {
-                Files.IsFileNameValid(path);
+                Files.IsFileNameValid(Path);
             }
             catch (Exception ex)
             {
@@ -49,14 +51,14 @@ namespace MCrypt.UI
             }
             
             // If object does not exist
-            if (!File.Exists(path) && !Directory.Exists(path))
+            if (!File.Exists(Path) && !Directory.Exists(Path))
             {
                 MessageBox.Show(this, "The specified object does not exists.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             // If decrypt directory => ERROR
-            if (Files.IsPathDirectory(path) && comboBoxMode.SelectedItem.ToString() == "Decrypt")
+            if (Files.IsPathDirectory(Path) && comboBoxMode.SelectedItem.ToString() == "Decrypt")
             {
                 MessageBox.Show(this, "It is impossible to decrypt a directory.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -65,15 +67,15 @@ namespace MCrypt.UI
             // Save mode
             if (comboBoxMode.SelectedItem.ToString() == "Encrypt")
             {
-                mode = CryptMode.Encrypt;
+                Mode = CryptMode.Encrypt;
             }
             else if (comboBoxMode.SelectedItem.ToString() == "Decrypt")
             {
-                mode = CryptMode.Decrypt;
+                Mode = CryptMode.Decrypt;
             }
             else
             {
-                mode = Files.GetCryptModeByExt(path);
+                Mode = Files.GetCryptModeByExt(Path);
             }
 
             // By closing, Program.cs will run the end of the program.
@@ -82,14 +84,17 @@ namespace MCrypt.UI
 
         private void btnBrowseFile_Click(object sender, EventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.CheckFileExists = true;
-            fileDialog.CheckPathExists = true;
-            fileDialog.Multiselect = false;
-            fileDialog.Title = "MCrypt - Choose a file to compute";
-            fileDialog.Filter = "All files (*.*)|*.*";
+            CommonOpenFileDialog fileDialog = new CommonOpenFileDialog
+            {
+                EnsureFileExists = true,
+                EnsurePathExists = true,
+                Multiselect = false,
+                Title = "Choose a file to compute"
+            };
+            fileDialog.Filters.Add(new CommonFileDialogFilter("All Files", "*.*"));
+            //fileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
-            if (fileDialog.ShowDialog() == DialogResult.OK)
+            if (fileDialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 txtFileName.Text = fileDialog.FileName;
                 txtFileName.SelectionStart = txtFileName.TextLength;
@@ -98,13 +103,17 @@ namespace MCrypt.UI
 
         private void btnBrowseDirectory_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-            fbd.Description = "Choose a folder to crypt with MCrypt.";
-            fbd.ShowNewFolderButton = true;
-
-            if (fbd.ShowDialog() == DialogResult.OK)
+            CommonOpenFileDialog fileDialog = new CommonOpenFileDialog
             {
-                txtFileName.Text = fbd.SelectedPath;
+                Title = "Choose a folder to encrypt",
+                IsFolderPicker = true,
+                EnsurePathExists = true
+            };
+            //fileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+            if (fileDialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                txtFileName.Text = fileDialog.FileName;
                 txtFileName.SelectionStart = txtFileName.TextLength;
             }
         }
@@ -138,7 +147,7 @@ namespace MCrypt.UI
 
         private void aboutLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            AboutUI aboutUi = new AboutUI();
+            AboutForm aboutUi = new AboutForm();
             aboutUi.ShowDialog(this);
         }
     }

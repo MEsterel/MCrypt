@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 
-namespace MCrypt.Utils
+namespace MCrypt.Tools
 {
     /// <summary>
     /// Use this class to provide Backgound worker progress changes between methods.
@@ -73,8 +73,8 @@ namespace MCrypt.Utils
                 throw new ArgumentException("The provided Background Worker does not report progress.", "bgw");
             }
             this.bgw = bgw;
-            this.Percentage = 0;
-            this.UserState = null;
+            Percentage = 0;
+            UserState = null;
         }
 
         /// <summary>

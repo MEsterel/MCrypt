@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using System.IO;
 using MCrypt.Tools;
 using MCrypt.Exceptions;
+using MCrypt.Cryptography;
 
-namespace MCrypt.Utils
+namespace MCrypt.Tools
 {
     static class Files
     {
@@ -34,6 +35,13 @@ namespace MCrypt.Utils
         public static string GetTempFilePath()
         {
             return Path.GetTempFileName();
+        }
+
+        public static string GetTempDirectoryPath()
+        {
+            string tempDirectory = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+            Directory.CreateDirectory(tempDirectory);
+            return tempDirectory;
         }
 
         /// <summary>
@@ -89,6 +97,16 @@ namespace MCrypt.Utils
         public static bool IsPathDirectory(string path)
         {
             return (File.GetAttributes(path) & FileAttributes.Directory) == FileAttributes.Directory;
+        }
+
+        public static void OptimalFileDelete(string path)
+        {
+            File.Delete(path);
+        }
+
+        public static void OptimalDirectoryDelete(string path)
+        {
+            Directory.Delete(path, true);
         }
     }
 }

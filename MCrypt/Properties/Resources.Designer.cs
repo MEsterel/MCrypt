@@ -19,7 +19,7 @@ namespace MCrypt.Properties {
     // à l'aide d'un outil, tel que ResGen ou Visual Studio.
     // Pour ajouter ou supprimer un membre, modifiez votre fichier .ResX, puis réexécutez ResGen
     // avec l'option /str ou régénérez votre projet VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -57,6 +57,16 @@ namespace MCrypt.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] BCrypt_Net_Next {
+            get {
+                object obj = ResourceManager.GetObject("BCrypt.Net.Next", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -111,6 +121,16 @@ namespace MCrypt.Properties {
         }
         
         /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lock64 {
+            get {
+                object obj = ResourceManager.GetObject("lock64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Icon semblable à (Icône).
         /// </summary>
         internal static System.Drawing.Icon MCryptIcon {
@@ -135,7 +155,7 @@ namespace MCrypt.Properties {
         /// </summary>
         internal static byte[] MetroFramework_Design {
             get {
-                object obj = ResourceManager.GetObject("MetroFramework_Design", resourceCulture);
+                object obj = ResourceManager.GetObject("MetroFramework.Design", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -145,7 +165,7 @@ namespace MCrypt.Properties {
         /// </summary>
         internal static byte[] MetroFramework_Fonts {
             get {
-                object obj = ResourceManager.GetObject("MetroFramework_Fonts", resourceCulture);
+                object obj = ResourceManager.GetObject("MetroFramework.Fonts", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -156,6 +176,36 @@ namespace MCrypt.Properties {
         internal static byte[] MExceptionReporter {
             get {
                 object obj = ResourceManager.GetObject("MExceptionReporter", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] Microsoft_WindowsAPICodePack {
+            get {
+                object obj = ResourceManager.GetObject("Microsoft.WindowsAPICodePack", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] Microsoft_WindowsAPICodePack_Shell {
+            get {
+                object obj = ResourceManager.GetObject("Microsoft.WindowsAPICodePack_Shell", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] Microsoft_WindowsAPICodePack_ShellExtensions {
+            get {
+                object obj = ResourceManager.GetObject("Microsoft.WindowsAPICodePack_ShellExtensions", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -177,6 +227,36 @@ namespace MCrypt.Properties {
             get {
                 object obj = ResourceManager.GetObject("search20", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] System_Buffers {
+            get {
+                object obj = ResourceManager.GetObject("System.Buffers", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] System_Memory {
+            get {
+                object obj = ResourceManager.GetObject("System.Memory", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] System_Runtime_CompilerServices_Unsafe {
+            get {
+                object obj = ResourceManager.GetObject("System.Runtime.CompilerServices.Unsafe", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }

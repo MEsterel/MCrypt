@@ -51,13 +51,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>3.0.ico</ApplicationIcon>
+    <ApplicationIcon>MCryptIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>mcryptKeyFile.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <DelaySign>false</DelaySign>
@@ -66,6 +67,10 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net-Next, Version=4.0.0.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net-Next.4.0.0\lib\net452\BCrypt.Net-Next.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="MetroFramework">
       <HintPath>..\..\MattServerGUI\packages\MetroModernUI.1.3.0.0\lib\net\MetroFramework.dll</HintPath>
       <Private>False</Private>
@@ -84,17 +89,42 @@
     </Reference>
     <Reference Include="MExceptionReporter">
       <HintPath>Resources\MExceptionReporter.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAPICodePack-Core.1.1.0.0\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAPICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.ShellExtensions, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAPICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.ShellExtensions.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="MUpdate">
       <HintPath>Resources\MUpdate.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\netstandard1.1\System.Buffers.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\netstandard1.1\System.Memory.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -106,8 +136,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Output.cs" />
-    <Compile Include="Core\RegistryEditor.cs" />
+    <Compile Include="Cryptography\CrypterInfo.cs" />
+    <Compile Include="Tools\Output.cs" />
     <Compile Include="Cryptography\CryptArgs.cs" />
     <Compile Include="Cryptography\TempCryptArgs.cs" />
     <Compile Include="CustomActionsForInstaller.cs">
@@ -119,59 +149,78 @@
     <Compile Include="Exceptions\DecryptException.cs" />
     <Compile Include="Exceptions\EncryptException.cs" />
     <Compile Include="Exceptions\InvalidFileName.cs" />
+    <Compile Include="Exceptions\NotMCryptFileException.cs" />
     <Compile Include="Exceptions\WrongPasswordException.cs" />
     <Compile Include="Tools\DirectoryZipper.cs" />
     <Compile Include="Tools\UpdateManager.cs" />
-    <Compile Include="Utils\BgwProgressUpdater.cs" />
-    <Compile Include="Tools\EnumCryptMode.cs" />
-    <Compile Include="Utils\Files.cs" />
-    <Compile Include="Tools\TempDecryptFile.cs" />
-    <Compile Include="UI\AboutUI.cs">
+    <Compile Include="UI\SaveDirectoryUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\SaveDirectoryUC.Designer.cs">
+      <DependentUpon>SaveDirectoryUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\BgwProgressUpdater.cs" />
+    <Compile Include="Cryptography\EnumCryptMode.cs" />
+    <Compile Include="Tools\Files.cs" />
+    <Compile Include="Cryptography\TempDecryptFile.cs" />
+    <Compile Include="UI\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\AboutUI.Designer.cs">
-      <DependentUpon>AboutUI.cs</DependentUpon>
+    <Compile Include="UI\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\DecryptUI.cs">
+    <Compile Include="UI\DecryptForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\DecryptUI.Designer.cs">
-      <DependentUpon>DecryptUI.cs</DependentUpon>
+    <Compile Include="UI\DecryptForm.Designer.cs">
+      <DependentUpon>DecryptForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\EncryptUI.cs">
+    <Compile Include="UI\EncryptForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\EncryptUI.Designer.cs">
-      <DependentUpon>EncryptUI.cs</DependentUpon>
+    <Compile Include="UI\EncryptForm.Designer.cs">
+      <DependentUpon>EncryptForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Program.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Cryptography\Crypter.cs" />
-    <Compile Include="UI\FileBrowserUI.cs">
+    <Compile Include="Cryptography\FileCrypter.cs" />
+    <Compile Include="UI\FileBrowserForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\FileBrowserUI.Designer.cs">
-      <DependentUpon>FileBrowserUI.cs</DependentUpon>
+    <Compile Include="UI\FileBrowserForm.Designer.cs">
+      <DependentUpon>FileBrowserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FolderTempOpenForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FolderTempOpenForm.Designer.cs">
+      <DependentUpon>FolderTempOpenForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Resources\MUpdate.dll" />
-    <EmbeddedResource Include="UI\AboutUI.resx">
-      <DependentUpon>AboutUI.cs</DependentUpon>
+    <EmbeddedResource Include="UI\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\DecryptUI.resx">
-      <DependentUpon>DecryptUI.cs</DependentUpon>
+    <EmbeddedResource Include="UI\DecryptForm.resx">
+      <DependentUpon>DecryptForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\EncryptUI.resx">
-      <DependentUpon>EncryptUI.cs</DependentUpon>
+    <EmbeddedResource Include="UI\EncryptForm.resx">
+      <DependentUpon>EncryptForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\FileBrowserUI.resx">
-      <DependentUpon>FileBrowserUI.cs</DependentUpon>
+    <EmbeddedResource Include="UI\FileBrowserForm.resx">
+      <DependentUpon>FileBrowserForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="mcryptKeyFile.pfx" />
+    <EmbeddedResource Include="UI\SaveDirectoryUC.resx">
+      <DependentUpon>SaveDirectoryUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FolderTempOpenForm.resx">
+      <DependentUpon>FolderTempOpenForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -193,17 +242,24 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="3.0.ico" />
     <Content Include="MCryptIcon.ico" />
+    <None Include="Resources\lock64.png" />
+    <EmbeddedResource Include="Resources\BCrypt.Net-Next.dll" />
+    <EmbeddedResource Include="Resources\System.Runtime.CompilerServices.Unsafe.dll" />
+    <EmbeddedResource Include="Resources\System.Memory.dll" />
+    <EmbeddedResource Include="Resources\System.Buffers.dll" />
+    <EmbeddedResource Include="Resources\Microsoft.WindowsAPICodePack.ShellExtensions.dll" />
+    <EmbeddedResource Include="Resources\Microsoft.WindowsAPICodePack.Shell.dll" />
+    <EmbeddedResource Include="Resources\Microsoft.WindowsAPICodePack.dll" />
     <EmbeddedResource Include="Resources\MExceptionReporter.dll" />
     <None Include="Resources\3.0.png" />
     <None Include="Resources\lock1281.png" />
     <None Include="Resources\MCrypt 1.0.png" />
-    <None Include="Resources\MetroFramework.Design.dll" />
-    <None Include="Resources\MetroFramework.dll" />
-    <None Include="Resources\MetroFramework.Fonts.dll" />
     <None Include="Resources\folder20.png" />
     <None Include="Resources\file20.png" />
+    <EmbeddedResource Include="Resources\MetroFramework.Design.dll" />
+    <EmbeddedResource Include="Resources\MetroFramework.dll" />
+    <EmbeddedResource Include="Resources\MetroFramework.Fonts.dll" />
     <None Include="Resources\search20.png" />
     <None Include="Resources\1450485423_Download.png" />
     <None Include="Resources\lock128.png" />
@@ -227,6 +283,17 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="SHDocVw">
+      <Guid>{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -11,10 +11,11 @@ using System.IO;
 using MCrypt.Exceptions;
 using MCrypt.Tools;
 using MCrypt.Cryptography;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace MCrypt.UI
 {
-    public partial class DecryptUI : Form
+    public partial class DecryptForm : Form
     {
         /// <summary>
         /// Input file path.
@@ -22,14 +23,9 @@ namespace MCrypt.UI
         private string inputFilePath;
 
         /// <summary>
-        /// Input file extension.
-        /// </summary>
-        private string inputFileExtension;
-
-        /// <summary>
         /// Output file path.
         /// </summary>
-        private string outputFilePath;
+        private string outputDirectory;
 
         /// <summary>
         /// Password.
@@ -46,19 +42,19 @@ namespace MCrypt.UI
         /// </summary>
         /// <param name="path">Path of the file to decrypt.</param>
         /// <param name="mouseStartLocation">True: start location at mouse position. False: start location at center screen.</param>
-        public DecryptUI(string path, bool mouseStartLocation = true)
+        public DecryptForm(string path, bool mouseStartLocation = true)
         {
             InitializeComponent();
             UIReady();
 
             if (mouseStartLocation == true)
-                this.Location = new Point(MousePosition.X, MousePosition.Y);
+                Location = new Point(MousePosition.X, MousePosition.Y);
             else
-                this.Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2, (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
-            this.AcceptButton = btnDecrypt;
-            this.inputFilePath = path;
-            this.inputFileExtension = Path.GetExtension(Path.GetFileNameWithoutExtension(inputFilePath));
-            rdobtnSaveIsSource.Checked = true;
+                Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2, (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
+
+            AcceptButton = btnDecrypt;
+            inputFilePath = path;
+            saveDirectoryUC.InitialDirectory = Path.GetDirectoryName(inputFilePath);
             rdobtnOpenTemp.Checked = true;
             lblStatus.Text = "";
         }
@@ -77,54 +73,33 @@ namespace MCrypt.UI
             if (!File.Exists(inputFilePath))
             {
                 MessageBox.Show(this, "Original file has been moved or deleted before decryption.", this.Text + " - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
+                Close();
             }
 
             // Set last values
             password = tbPassword.Text;
 
-            //Run threw parameters
+            //Run through parameters
             if (rdobtnDecryptAndSave.Checked)
             {
                 //// DECRYPT AND SAVE /////////////////////////////////////////////////
-                if (rdobtnSaveIsSource.Checked)
+                if (saveDirectoryUC.SaveIsSource)
                 {
-                    outputFilePath = Path.GetDirectoryName(inputFilePath) + "\\" + Path.GetFileNameWithoutExtension(inputFilePath);
+                    Output.Print("Output path = Source directory");
+                    outputDirectory = Path.GetDirectoryName(inputFilePath);
 
-                    // Check output file path
-                    if (File.Exists(outputFilePath))
-                    {
-                        if (MessageBox.Show(this,
-                            "A file named \"" + Path.GetFileName(outputFilePath) + "\" already exists. Do you want to replace it?",
-                            this.Text + " - Warning",
-                            MessageBoxButtons.YesNo,
-                            MessageBoxIcon.Warning,
-                            MessageBoxDefaultButton.Button1) == DialogResult.Yes)
-                            File.Delete(outputFilePath);
-                        else
-                            return;
-                    }
+                    // Existing files are not managed here.
                 }
                 else
                 {
-                    if (txtSaveDirectory.Text == "")
-                    {
-                        MessageBox.Show(this, "Please specify the location of the output file.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Output.Print("Output path = Other directory");
+
+                    if (!saveDirectoryUC.ValidateOtherDirectory())
                         return;
-                    }
 
-                    if (!Directory.Exists(Path.GetDirectoryName(txtSaveDirectory.Text)))
-                    {
-                        MessageBox.Show(this, "The specified directory does not exist.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
+                    outputDirectory = saveDirectoryUC.OtherDirectory;
 
-                    outputFilePath = txtSaveDirectory.Text;
-
-                    if (File.Exists(outputFilePath))
-                    {
-                        File.Delete(outputFilePath);
-                    }
+                    // Existing files are not managed here.
                 }
 
                 // Set backgorund worker
@@ -134,17 +109,19 @@ namespace MCrypt.UI
 
                 // Decrypt !
                 UIWorking();
-                lblStatus.Text = "Decrypting the file";
-                bwSave.RunWorkerAsync(new CryptArgs(inputFilePath, outputFilePath, password));
+                lblStatus.Text = "Decrypting";
+                bwSave.RunWorkerAsync(new CryptArgs(inputFilePath, outputDirectory, password));
             }
             else
             {
                 //// OPEN TEMPORARILY /////////////////////////////////////////////////////////////////////////
                 UIWorking();
-                this.TopMost = false;
+                TopMost = false;
 
-                BackgroundWorker bwOpenTemp = new BackgroundWorker();
-                bwOpenTemp.WorkerReportsProgress = true;
+                BackgroundWorker bwOpenTemp = new BackgroundWorker
+                {
+                    WorkerReportsProgress = true
+                };
                 bwOpenTemp.DoWork += bwOpenTemp_DoWork;
                 bwOpenTemp.RunWorkerCompleted += bwOpenTemp_RunWorkerCompleted;
                 bwOpenTemp.ProgressChanged += bwOpenTemp_ProgressChanged;
@@ -159,7 +136,7 @@ namespace MCrypt.UI
         void bwOpenTemp_DoWork(object sender, DoWorkEventArgs e)
         {
             TempCryptArgs args = (TempCryptArgs)e.Argument;
-            TempDecryptFile tDecryptFile = new TempDecryptFile(args.InputFilePath, args.Password, (BackgroundWorker)sender);
+            TempDecryptFile tDecryptFile = new TempDecryptFile(args.InputFilePath, args.Password, (BackgroundWorker)sender, this);
             tDecryptFile.Run();
         }
 
@@ -170,13 +147,15 @@ namespace MCrypt.UI
         {
             UIReady();
             lblStatus.Text = "";
-            this.TopMost = true;
-            this.SetTopLevel(true);
+            TopMost = true;
+            SetTopLevel(true);
 
             if (e.Error != null) // If there is an error
             {
                 if (e.Error is WrongPasswordException)
                     MessageBox.Show(this, "Wrong password.", this.Text + " - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (e.Error is NotMCryptFileException)
+                    MessageBox.Show(this, "The file to decrypt is not a MCrypt encrypted file.", this.Text + " - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                     MessageBox.Show(this, "An error occured during file decryption.\nDetails: " + e.Error.Message, this.Text + " - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -184,16 +163,10 @@ namespace MCrypt.UI
                 tbPassword.Select();
                 return;
             }
-            else // No error
+            else
             {
-                // Delete original file ? //////////////////
-                if (ckboxDeleteOriginal.Checked == true)
-                {
-                    File.Delete(inputFilePath);
-                }
-
-                // Exit application when all is done!
-                Application.Exit();
+                // Close when all is done!
+                Close();
             }
         }
 
@@ -216,7 +189,7 @@ namespace MCrypt.UI
         void bwSave_DoWork(object sender, DoWorkEventArgs e)
         {
             CryptArgs args = (CryptArgs)e.Argument;
-            Crypter.DecryptFile(args.InputFilePath, args.OutputFilePath, args.Password);
+            FileCrypter.DecryptFile(args.InputPath, args.OutputPath, args.Password);
         }
 
         /// <summary>
@@ -231,10 +204,12 @@ namespace MCrypt.UI
                 UIReady();
                 if (e.Error is WrongPasswordException)
                     MessageBox.Show(this, "Wrong password.", this.Text + " - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (e.Error is NotMCryptFileException)
+                    MessageBox.Show(this, "The file to decrypt is not a MCrypt encrypted file.", this.Text + " - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
-                    MessageBox.Show(this, "An error occured during file decryption.", this.Text + " - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, "An error occured during file decryption.\nDetails: " + e.Error.Message, this.Text + " - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                try { File.Delete(outputFilePath);  }
+                try { File.Delete(outputDirectory);  }
                 catch { }
 
                 tbPassword.Clear();
@@ -246,7 +221,7 @@ namespace MCrypt.UI
                 cancelClose = false;
 
                 // Delete original file ? //////////////////
-                if (ckboxDeleteOriginal.Checked == true)
+                if (saveDirectoryUC.DeleteOriginal)
                 {
                     File.Delete(inputFilePath);
                 }
@@ -263,29 +238,10 @@ namespace MCrypt.UI
             aboutLink.Enabled = true;
             tbPassword.Enabled = true;
             btnDecrypt.Enabled = true;
-            if (rdobtnSaveIsSource.Checked)
-            {
-                txtSaveDirectory.Enabled = false;
-                btnBrowseFile.Enabled = false;
-            }
-            else
-            {
-                txtSaveDirectory.Enabled = true;
-                btnBrowseFile.Enabled = true;
-            }
-
-            rdobtnSaveIsOther.Enabled = true;
-            ckboxDeleteOriginal.Enabled = true;
+            saveDirectoryUC.UserInputEnabled = true;
             rdobtnDecryptAndSave.Enabled = true;
             rdobtnOpenTemp.Enabled = true;
-            if (rdobtnDecryptAndSave.Checked)
-            {
-                panelSave.Enabled = true;
-            }
-            else
-            {
-                panelSave.Enabled = false;
-            }
+            rdobtnOpenTemp_CheckedChanged(null, null); //simulating to refresh
 
             metroProgressSpinner1.Visible = false;
             metroProgressSpinner1.Spinning = false;
@@ -298,10 +254,7 @@ namespace MCrypt.UI
             aboutLink.Enabled = false;
             tbPassword.Enabled = false;
             btnDecrypt.Enabled = false;
-            rdobtnSaveIsSource.Enabled = false;
-            rdobtnSaveIsOther.Enabled = false;
-            btnBrowseFile.Enabled = false;
-            ckboxDeleteOriginal.Enabled = false;
+            saveDirectoryUC.UserInputEnabled = false;
             btnDecrypt.Enabled = false;
             rdobtnOpenTemp.Enabled = false;
             rdobtnDecryptAndSave.Enabled = false;
@@ -312,63 +265,25 @@ namespace MCrypt.UI
 
         private void aboutLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            AboutUI aboutUi = new AboutUI();
+            AboutForm aboutUi = new AboutForm();
             aboutUi.ShowDialog(this);
         }
 
-        private void rdobtnSaveIsSource_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdobtnSaveIsSource.Checked == true)
-            {
-                txtSaveDirectory.Enabled = false;
-                btnBrowseFile.Enabled = false;
-            }
-            else
-            {
-                txtSaveDirectory.Enabled = true;
-                btnBrowseFile.Enabled = true;
-            }
-        }
 
-        private void btnBrowseFile_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog fileDialog = new SaveFileDialog();
-            fileDialog.CheckPathExists = true;
-            fileDialog.Title = "MCrypt - Save decrypted file";
-            fileDialog.Filter = "Original file extension (*" + inputFileExtension + ")|*" + inputFileExtension + "|All files (*.*)|*.*";
-            fileDialog.OverwritePrompt = true;
-            fileDialog.AddExtension = true;
-            fileDialog.DefaultExt = inputFileExtension;
-
-            if (fileDialog.ShowDialog() == DialogResult.OK)
-            {
-                txtSaveDirectory.Text = fileDialog.FileName;
-                txtSaveDirectory.SelectionStart = txtSaveDirectory.TextLength;
-            }
-        }
-
-        /// <summary>
-        /// When the rdobtn Open temporarily state changes.
-        /// </summary>
         private void rdobtnOpenTemp_CheckedChanged(object sender, EventArgs e)
         {
             if (rdobtnOpenTemp.Checked)
             {
-                panelSave.Visible = false;
-                panelSave.Enabled = false;
+                saveDirectoryUC.Visible = false;
                 this.Size = new Size(295, 249);
             }
             else
             {
-                panelSave.Visible = true;
-                panelSave.Enabled = true;
+                saveDirectoryUC.Visible = true;
                 this.Size = new Size(295, 346);
             }
         }
-        
-        /// <summary>
-        /// When the user wants to close the window.
-        /// </summary>
+
         private void DecryptUI_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (cancelClose)
@@ -379,11 +294,6 @@ namespace MCrypt.UI
                     e.Cancel = true;
                 }
             }
-        }
-
-        private void DecryptUI_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

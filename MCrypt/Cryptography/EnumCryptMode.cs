@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace MCrypt.Tools
+namespace MCrypt.Cryptography
 {
     public enum CryptMode
     {
@@ -22,6 +22,6 @@ namespace MCrypt.Tools
         /// <summary>
         /// Not recommended. No mode set, to be defined.
         /// </summary>
-        Auto = 0,
+        Auto = 0
     }
 }

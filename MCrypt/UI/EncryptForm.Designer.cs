@@ -1,6 +1,6 @@
 ﻿namespace MCrypt.UI
 {
-    partial class EncryptUI
+    partial class EncryptForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EncryptUI));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EncryptForm));
             this.lblMcrypt = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tbPassword = new System.Windows.Forms.TextBox();
@@ -40,16 +40,9 @@
             this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
             this.aboutLink = new System.Windows.Forms.LinkLabel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.rdobtnSaveIsOther = new System.Windows.Forms.RadioButton();
-            this.btnBrowseFile = new System.Windows.Forms.Button();
-            this.rdobtnSaveIsSource = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtSaveDirectory = new System.Windows.Forms.TextBox();
-            this.ckboxDeleteOriginal = new System.Windows.Forms.CheckBox();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pbKey = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.saveDirectoryUC = new MCrypt.UI.SaveDirectoryUC();
             ((System.ComponentModel.ISupportInitialize)(this.pbKey)).BeginInit();
             this.SuspendLayout();
             // 
@@ -150,88 +143,17 @@
             this.toolTip1.SetToolTip(this.aboutLink, "About MCrypt");
             this.aboutLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.aboutLink_LinkClicked);
             // 
-            // rdobtnSaveIsOther
-            // 
-            this.rdobtnSaveIsOther.AutoSize = true;
-            this.rdobtnSaveIsOther.Location = new System.Drawing.Point(41, 191);
-            this.rdobtnSaveIsOther.Name = "rdobtnSaveIsOther";
-            this.rdobtnSaveIsOther.Size = new System.Drawing.Size(14, 13);
-            this.rdobtnSaveIsOther.TabIndex = 3;
-            this.rdobtnSaveIsOther.TabStop = true;
-            this.toolTip1.SetToolTip(this.rdobtnSaveIsOther, "Save the file in another directory");
-            this.rdobtnSaveIsOther.UseVisualStyleBackColor = true;
-            // 
-            // btnBrowseFile
-            // 
-            this.btnBrowseFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowseFile.Image = global::MCrypt.Properties.Resources.search20;
-            this.btnBrowseFile.Location = new System.Drawing.Point(235, 186);
-            this.btnBrowseFile.Name = "btnBrowseFile";
-            this.btnBrowseFile.Size = new System.Drawing.Size(24, 24);
-            this.btnBrowseFile.TabIndex = 5;
-            this.toolTip1.SetToolTip(this.btnBrowseFile, "Browse a file...");
-            this.btnBrowseFile.UseVisualStyleBackColor = true;
-            this.btnBrowseFile.Click += new System.EventHandler(this.btnBrowseFile_Click);
-            // 
-            // rdobtnSaveIsSource
-            // 
-            this.rdobtnSaveIsSource.AutoSize = true;
-            this.rdobtnSaveIsSource.Location = new System.Drawing.Point(41, 167);
-            this.rdobtnSaveIsSource.Name = "rdobtnSaveIsSource";
-            this.rdobtnSaveIsSource.Size = new System.Drawing.Size(208, 17);
-            this.rdobtnSaveIsSource.TabIndex = 2;
-            this.rdobtnSaveIsSource.TabStop = true;
-            this.rdobtnSaveIsSource.Text = "Output directory = Source directory";
-            this.rdobtnSaveIsSource.UseVisualStyleBackColor = true;
-            this.rdobtnSaveIsSource.CheckedChanged += new System.EventHandler(this.rdobtnSaveIsSource_CheckedChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 151);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 13);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Save:";
-            // 
-            // txtSaveDirectory
-            // 
-            this.txtSaveDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSaveDirectory.Location = new System.Drawing.Point(61, 187);
-            this.txtSaveDirectory.Name = "txtSaveDirectory";
-            this.txtSaveDirectory.Size = new System.Drawing.Size(168, 22);
-            this.txtSaveDirectory.TabIndex = 4;
-            // 
-            // ckboxDeleteOriginal
-            // 
-            this.ckboxDeleteOriginal.AutoSize = true;
-            this.ckboxDeleteOriginal.Location = new System.Drawing.Point(41, 212);
-            this.ckboxDeleteOriginal.Name = "ckboxDeleteOriginal";
-            this.ckboxDeleteOriginal.Size = new System.Drawing.Size(121, 17);
-            this.ckboxDeleteOriginal.TabIndex = 6;
-            this.ckboxDeleteOriginal.Text = "Delete original file";
-            this.ckboxDeleteOriginal.UseVisualStyleBackColor = true;
-            // 
             // lblStatus
             // 
-            this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblStatus.AutoSize = true;
+            this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblStatus.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblStatus.Location = new System.Drawing.Point(40, 251);
+            this.lblStatus.Location = new System.Drawing.Point(40, 246);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(39, 13);
+            this.lblStatus.Size = new System.Drawing.Size(138, 25);
             this.lblStatus.TabIndex = 27;
             this.lblStatus.Text = "Status";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::MCrypt.Properties.Resources.folder20;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 151);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(20, 20);
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
+            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pbKey
             // 
@@ -242,19 +164,24 @@
             this.pbKey.TabIndex = 2;
             this.pbKey.TabStop = false;
             // 
-            // EncryptUI
+            // saveDirectoryUC
+            // 
+            this.saveDirectoryUC.BackColor = System.Drawing.Color.White;
+            this.saveDirectoryUC.Font = new System.Drawing.Font("Segoe UI Emoji", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveDirectoryUC.InitialDirectory = null;
+            this.saveDirectoryUC.Location = new System.Drawing.Point(12, 147);
+            this.saveDirectoryUC.Name = "saveDirectoryUC";
+            this.saveDirectoryUC.Size = new System.Drawing.Size(247, 85);
+            this.saveDirectoryUC.TabIndex = 28;
+            // 
+            // EncryptForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(271, 282);
+            this.Controls.Add(this.saveDirectoryUC);
             this.Controls.Add(this.lblStatus);
-            this.Controls.Add(this.ckboxDeleteOriginal);
-            this.Controls.Add(this.btnBrowseFile);
-            this.Controls.Add(this.txtSaveDirectory);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.rdobtnSaveIsOther);
-            this.Controls.Add(this.rdobtnSaveIsSource);
             this.Controls.Add(this.aboutLink);
             this.Controls.Add(this.metroProgressSpinner1);
             this.Controls.Add(this.lblEncrypt);
@@ -263,20 +190,17 @@
             this.Controls.Add(this.tbPassword);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pbKey);
             this.Controls.Add(this.lblMcrypt);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "EncryptUI";
+            this.Name = "EncryptForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "MCrypt Encrypt";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EncryptUI_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbKey)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -295,13 +219,7 @@
         private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner1;
         private System.Windows.Forms.LinkLabel aboutLink;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.RadioButton rdobtnSaveIsSource;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RadioButton rdobtnSaveIsOther;
-        private System.Windows.Forms.TextBox txtSaveDirectory;
-        private System.Windows.Forms.Button btnBrowseFile;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.CheckBox ckboxDeleteOriginal;
         private System.Windows.Forms.Label lblStatus;
+        private SaveDirectoryUC saveDirectoryUC;
     }
 }

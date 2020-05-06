@@ -1,6 +1,6 @@
-﻿using MCrypt.Tools;
+﻿using MCrypt.Cryptography;
+using MCrypt.Tools;
 using MCrypt.UI;
-using MCrypt.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MCrypt.Core
+namespace MCrypt
 {
     static class Program
     {
@@ -59,18 +59,18 @@ namespace MCrypt.Core
                 {
                     Output.Print("No args > launching file browser interface.");
 
-                    FileBrowserUI fBUI = new FileBrowserUI();
+                    FileBrowserForm fBUI = new FileBrowserForm();
                     Application.Run(fBUI);
 
-                    if (fBUI.mode == CryptMode.Encrypt)
+                    if (fBUI.Mode == CryptMode.Encrypt)
                     {
-                        Output.Print("Running encrypt UI to file \"" + fBUI.path + "\"");
-                        Application.Run(new EncryptUI(fBUI.path, false));
+                        Output.Print("Running encrypt UI to file \"" + fBUI.Path + "\"");
+                        Application.Run(new EncryptForm(fBUI.Path, false));
                     }
-                    else if (fBUI.mode == CryptMode.Decrypt)
+                    else if (fBUI.Mode == CryptMode.Decrypt)
                     {
-                        Output.Print("Running decrypt UI to file \"" + fBUI.path + "\"");
-                        Application.Run(new DecryptUI(fBUI.path, false));
+                        Output.Print("Running decrypt UI to file \"" + fBUI.Path + "\"");
+                        Application.Run(new DecryptForm(fBUI.Path, false));
                     }
 
                     return;
@@ -100,7 +100,17 @@ namespace MCrypt.Core
                 }
                 else if (mode == CryptMode.Auto) // if it exists and that no args impose crypt mode, determine it
                 {
-                    mode = Files.GetCryptModeByExt(path);
+                    if (Files.IsPathDirectory(path))
+                    {
+                        Output.Print("Directory detected.");
+                        mode = CryptMode.Encrypt;
+                    }
+                    else
+                    {
+                        Output.Print("File detected.");
+                        mode = Files.GetCryptModeByExt(path);
+                    }
+                    
                 }
                 Output.Print("Set crypt mode to \"" + mode.ToString() + "\"");
 
@@ -108,12 +118,12 @@ namespace MCrypt.Core
                 if (mode == CryptMode.Encrypt)
                 {
                     Output.Print("Running encrypt UI to object \"" + path + "\"");
-                    Application.Run(new EncryptUI(path));
+                    Application.Run(new EncryptForm(path));
                 }
                 else if (mode == CryptMode.Decrypt)
                 {
                     Output.Print("Running decrypt UI to object \"" + path + "\"");
-                    Application.Run(new DecryptUI(path));
+                    Application.Run(new DecryptForm(path));
                 }
             }
             catch (Exception ex)
@@ -132,32 +142,15 @@ namespace MCrypt.Core
         {
             Output.Print("Requesting DLL \"" + a.Name.Substring(0, a.Name.IndexOf(",")) + "\"");
 
-            if (a.Name.Substring(0, a.Name.IndexOf(",")) == "MetroFramework")
-            {
-                return Assembly.Load(Properties.Resources.MetroFramework);
-            }
+            string resourceName = new AssemblyName(a.Name).Name + ".dll";
+            string resource = Array.Find(Assembly.GetExecutingAssembly().GetManifestResourceNames(), element => element.EndsWith(resourceName));
 
-            if (a.Name.Substring(0, a.Name.IndexOf(",")) == "MetroFramework.Fonts")
+            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource))
             {
-                return Assembly.Load(Properties.Resources.MetroFramework_Fonts);
+                byte[] assemblyData = new byte[stream.Length];
+                stream.Read(assemblyData, 0, assemblyData.Length);
+                return Assembly.Load(assemblyData);
             }
-
-            if (a.Name.Substring(0, a.Name.IndexOf(",")) == "MetroFramework.Design")
-            {
-                return Assembly.Load(Properties.Resources.MetroFramework_Design);
-            }
-
-            if (a.Name.Substring(0, a.Name.IndexOf(",")) == "MUpdate")
-            {
-                return Assembly.Load(Properties.Resources.MUpdate);
-            }
-
-            if (a.Name.Substring(0, a.Name.IndexOf(",")) == "MExceptionReporter")
-            {
-                return Assembly.Load(Properties.Resources.MUpdate);
-            }
-
-            return null;
         }
 
         private static void runExceptionMessageHandler(Exception ex)
