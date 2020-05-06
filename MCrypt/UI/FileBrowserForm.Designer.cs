@@ -160,7 +160,7 @@
             this.btnBrowseDirectory.Text = " Browse folder";
             this.btnBrowseDirectory.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBrowseDirectory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.toolTip1.SetToolTip(this.btnBrowseDirectory, "Browse a file...");
+            this.toolTip1.SetToolTip(this.btnBrowseDirectory, "Browse a folder...");
             this.btnBrowseDirectory.UseVisualStyleBackColor = true;
             this.btnBrowseDirectory.Click += new System.EventHandler(this.btnBrowseDirectory_Click);
             // 

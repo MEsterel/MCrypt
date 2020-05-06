@@ -109,7 +109,7 @@ namespace MCrypt.UI
                 outputDirectory = saveDirectoryUC.OtherDirectory;
             }
 
-            simulatedOutputFilePath = Path.Combine(outputDirectory, Path.GetFileNameWithoutExtension(inputPath) + (isInputPathDirectory? " (MCrypted folder)": " (MCrypted file)") + ".mcrypt"); // Simulate final output path to target problems
+            simulatedOutputFilePath = Path.Combine(outputDirectory, Path.GetFileNameWithoutExtension(inputPath) + (isInputPathDirectory ? ".mcryptfolder" : ".mcryptfile")); // Simulate final output path to target problems
 
             if (File.Exists(simulatedOutputFilePath))
             {

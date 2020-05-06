@@ -33,7 +33,7 @@ namespace MCrypt.Cryptography
             try
             {
                 // Création de outputFilePath
-                outputFilePath = Path.Combine(outputDirectory, Path.GetFileNameWithoutExtension(inputPath) + ((isDirectory)? " (MCrypted folder)": " (MCrypted file)") + ".mcrypt");
+                outputFilePath = Path.Combine(outputDirectory, Path.GetFileNameWithoutExtension(inputPath) + (isDirectory? ".mcryptfolder": ".mcryptfile"));
                 Output.Print("Output file path: " + outputFilePath);
 
                 // MANAGE DIRECTORIES

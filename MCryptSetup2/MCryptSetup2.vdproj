@@ -69,6 +69,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_193E73A33C954303BC3E5B46E8E76499"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_20B3C106EA21DD3236F1318DC54400F5"
         "OwnerKey" = "8:_EB289B39B877488490666220E47B4324"
         "MsmSig" = "8:_UNDEFINED"
@@ -375,6 +381,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_CA44327EC8664CAD986E5F86FBF451A7"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_CCB0A6650750EB5E6A104B344F2A0943"
         "OwnerKey" = "8:_EB289B39B877488490666220E47B4324"
         "MsmSig" = "8:_UNDEFINED"
@@ -533,12 +545,6 @@
         {
         "MsmKey" = "8:_F35DD3771D1DFBBCF8B542FD93E23721"
         "OwnerKey" = "8:_EB289B39B877488490666220E47B4324"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_20B3C106EA21DD3236F1318DC54400F5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -931,6 +937,12 @@
         "OwnerKey" = "8:_340EFD024F6A3CAC3FC34A92CC35A41D"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_20B3C106EA21DD3236F1318DC54400F5"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -949,6 +961,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -965,6 +985,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -1176,7 +1204,7 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:TRUE"
+            "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -1240,6 +1268,26 @@
             "Register" = "3:1"
             "Exclude" = "11:TRUE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_193E73A33C954303BC3E5B46E8E76499"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\..\\Pictures\\Programmes\\MCrypt\\docLockedIco.ico"
+            "TargetName" = "8:docLockedIco.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_0C0D17A8BE5A427CAFEBCC420AB9025C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_20B3C106EA21DD3236F1318DC54400F5"
@@ -1362,7 +1410,7 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:TRUE"
+            "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -1672,7 +1720,7 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:TRUE"
+            "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -1765,7 +1813,7 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:TRUE"
+            "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -2544,6 +2592,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CA44327EC8664CAD986E5F86FBF451A7"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\..\\Pictures\\Programmes\\MCrypt\\folderLockedIco.ico"
+            "TargetName" = "8:folderLockedIco.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_0C0D17A8BE5A427CAFEBCC420AB9025C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_CCB0A6650750EB5E6A104B344F2A0943"
             {
             "AssemblyRegister" = "3:1"
@@ -2571,7 +2639,7 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:TRUE"
+            "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -2664,7 +2732,7 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:TRUE"
+            "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -3105,14 +3173,37 @@
         }
         "FileType"
         {
+            "{5EB83D71-FA18-4901-BE56-DE22E13CC478}:_67AEF78168044F70B14F12BAE073136A"
+            {
+            "Name" = "8:MCrypt Folder"
+            "Description" = "8:MCrypt Folder"
+            "Extensions" = "8:.mcryptfolder"
+            "MIME" = "8:"
+            "Icon" = "8:_CA44327EC8664CAD986E5F86FBF451A7"
+            "IconIndex" = "3:0"
+                "Command"
+                {
+                "Command" = "8:_EB289B39B877488490666220E47B4324"
+                }
+                "Verbs"
+                {
+                    "{95C0C507-CBF0-42B8-B119-07219E384A4A}:_12893A0080D745B78BEA24B656B91049"
+                    {
+                    "Command" = "8:&Open"
+                    "Verb" = "8:open"
+                    "Arguments" = "8:\"%1\""
+                    "Order" = "3:0"
+                    }
+                }
+            }
             "{5EB83D71-FA18-4901-BE56-DE22E13CC478}:_86EDB88BEB994AB4A36DC2A13021131C"
             {
             "Name" = "8:MCrypt File"
-            "Description" = "8:"
-            "Extensions" = "8:.mcrypt"
+            "Description" = "8:MCrypt File"
+            "Extensions" = "8:.mcryptfile"
             "MIME" = "8:"
-            "Icon" = "8:_EB289B39B877488490666220E47B4324"
-            "IconIndex" = "3:32512"
+            "Icon" = "8:_193E73A33C954303BC3E5B46E8E76499"
+            "IconIndex" = "3:0"
                 "Command"
                 {
                 "Command" = "8:_EB289B39B877488490666220E47B4324"
@@ -3414,70 +3505,6 @@
                                                             "ValueTypes" = "3:1"
                                                             "Value" = "8:\"[TARGETDIR]\\MCrypt.exe\""
                                                             }
-                                                        }
-                                                    }
-                                                }
-                                                "Values"
-                                                {
-                                                }
-                                            }
-                                        }
-                                        "Values"
-                                        {
-                                        }
-                                    }
-                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_FA63AF96EDD84EEB88F55903E4FD3DF1"
-                                    {
-                                    "Name" = "8:.mcrypt"
-                                    "Condition" = "8:"
-                                    "AlwaysCreate" = "11:FALSE"
-                                    "DeleteAtUninstall" = "11:FALSE"
-                                    "Transitive" = "11:FALSE"
-                                        "Keys"
-                                        {
-                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_3A5672DE69554560915F4D2C2DFDC627"
-                                            {
-                                            "Name" = "8:shell"
-                                            "Condition" = "8:"
-                                            "AlwaysCreate" = "11:FALSE"
-                                            "DeleteAtUninstall" = "11:FALSE"
-                                            "Transitive" = "11:FALSE"
-                                                "Keys"
-                                                {
-                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_60757D9A163945F0979C11470816FF37"
-                                                    {
-                                                    "Name" = "8:open"
-                                                    "Condition" = "8:"
-                                                    "AlwaysCreate" = "11:FALSE"
-                                                    "DeleteAtUninstall" = "11:FALSE"
-                                                    "Transitive" = "11:FALSE"
-                                                        "Keys"
-                                                        {
-                                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_903B13DAE2F74DD1AD6BD6BC62BF7087"
-                                                            {
-                                                            "Name" = "8:command"
-                                                            "Condition" = "8:"
-                                                            "AlwaysCreate" = "11:FALSE"
-                                                            "DeleteAtUninstall" = "11:FALSE"
-                                                            "Transitive" = "11:FALSE"
-                                                                "Keys"
-                                                                {
-                                                                }
-                                                                "Values"
-                                                                {
-                                                                    "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_7C036637DA314D6DA435CF2F32783486"
-                                                                    {
-                                                                    "Name" = "8:"
-                                                                    "Condition" = "8:"
-                                                                    "Transitive" = "11:FALSE"
-                                                                    "ValueTypes" = "3:1"
-                                                                    "Value" = "8:\"[TARGETDIR]\\MCrypt.exe\" \"%1\" /D"
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                        "Values"
-                                                        {
                                                         }
                                                     }
                                                 }
