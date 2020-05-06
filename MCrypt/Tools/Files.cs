@@ -18,7 +18,8 @@ namespace MCrypt.Tools
         /// <param name="path">Path of the file.</param>
         public static CryptMode GetCryptModeByExt(string path)
         {
-            if (Path.GetExtension(path)==".mcryptfile" || Path.GetExtension(path)==".mcryptfolder" || Path.GetExtension(path) == ".mcrypt")
+            string extension = Path.GetExtension(path);
+            if (extension == ".mcryptfile" || extension == ".mcryptfolder" || extension == ".mcrypt")
             {
                 return CryptMode.Decrypt;
             }
