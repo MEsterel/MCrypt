@@ -7,7 +7,7 @@ using System.Resources;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("MCrypt")]
-[assembly: AssemblyDescription("Easily encrypt files with a high secured AES encryption system.\r\n\r\n- LICENSE -\r\nThis application is a creation of Matthieu Badoy, who owns its copyrights. Pleasy do NOT modify this application. You are allowed to share this application, by putting a link to this license.\r\n\r\nThanks to Metro UI for the spinning loader.\r\n-----------")]
+[assembly: AssemblyDescription("Easily encrypt files with a high secured AES encryption system.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Matthieu Badoy")]
 [assembly: AssemblyProduct("MCrypt")]
@@ -33,6 +33,6 @@ using System.Resources;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.1.1.0")]
-[assembly: AssemblyFileVersion("1.1.1.0")]
+[assembly: AssemblyVersion("1.2.0.0")]
+[assembly: AssemblyFileVersion("1.2.0.0")]
 [assembly: NeutralResourcesLanguage("")]

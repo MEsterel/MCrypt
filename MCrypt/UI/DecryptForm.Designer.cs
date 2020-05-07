@@ -44,8 +44,8 @@
             this.rdobtnOpenTemp = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.pbKey = new System.Windows.Forms.PictureBox();
-            this.saveDirectoryUC = new MCrypt.UI.SaveDirectoryUC();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.saveDirectoryUC = new MCrypt.UI.SaveDirectoryUC();
             this.panelMode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbKey)).BeginInit();
@@ -53,172 +53,126 @@
             // 
             // metroProgressSpinner1
             // 
-            this.metroProgressSpinner1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.metroProgressSpinner1.Location = new System.Drawing.Point(12, 272);
+            resources.ApplyResources(this.metroProgressSpinner1, "metroProgressSpinner1");
             this.metroProgressSpinner1.Maximum = 100;
             this.metroProgressSpinner1.Name = "metroProgressSpinner1";
-            this.metroProgressSpinner1.Size = new System.Drawing.Size(23, 23);
             this.metroProgressSpinner1.Speed = 4F;
-            this.metroProgressSpinner1.TabIndex = 15;
+            this.toolTip1.SetToolTip(this.metroProgressSpinner1, resources.GetString("metroProgressSpinner1.ToolTip"));
             this.metroProgressSpinner1.UseSelectable = true;
             this.metroProgressSpinner1.Value = 33;
             // 
             // lblDecrypt
             // 
-            this.lblDecrypt.AutoSize = true;
-            this.lblDecrypt.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDecrypt.Location = new System.Drawing.Point(94, 13);
+            resources.ApplyResources(this.lblDecrypt, "lblDecrypt");
             this.lblDecrypt.Name = "lblDecrypt";
-            this.lblDecrypt.Size = new System.Drawing.Size(85, 30);
-            this.lblDecrypt.TabIndex = 14;
-            this.lblDecrypt.Text = "Decrypt";
+            this.toolTip1.SetToolTip(this.lblDecrypt, resources.GetString("lblDecrypt.ToolTip"));
             // 
             // btnDecrypt
             // 
-            this.btnDecrypt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDecrypt.Location = new System.Drawing.Point(184, 272);
+            resources.ApplyResources(this.btnDecrypt, "btnDecrypt");
             this.btnDecrypt.Name = "btnDecrypt";
-            this.btnDecrypt.Size = new System.Drawing.Size(75, 23);
-            this.btnDecrypt.TabIndex = 6;
-            this.btnDecrypt.Text = "&Decrypt";
+            this.toolTip1.SetToolTip(this.btnDecrypt, resources.GetString("btnDecrypt.ToolTip"));
             this.btnDecrypt.UseVisualStyleBackColor = true;
             this.btnDecrypt.Click += new System.EventHandler(this.btnDecrypt_Click);
             // 
             // tbPassword
             // 
-            this.tbPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbPassword.Location = new System.Drawing.Point(41, 74);
+            resources.ApplyResources(this.tbPassword, "tbPassword");
             this.tbPassword.Name = "tbPassword";
-            this.tbPassword.Size = new System.Drawing.Size(218, 22);
-            this.tbPassword.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.tbPassword, resources.GetString("tbPassword.ToolTip"));
             this.tbPassword.UseSystemPasswordChar = true;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(38, 58);
+            resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 13);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "Password: ";
+            this.toolTip1.SetToolTip(this.label2, resources.GetString("label2.ToolTip"));
             // 
             // lblMcrypt
             // 
-            this.lblMcrypt.AutoSize = true;
-            this.lblMcrypt.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.lblMcrypt, "lblMcrypt");
             this.lblMcrypt.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.lblMcrypt.Location = new System.Drawing.Point(8, 11);
             this.lblMcrypt.Name = "lblMcrypt";
-            this.lblMcrypt.Size = new System.Drawing.Size(94, 32);
-            this.lblMcrypt.TabIndex = 9;
-            this.lblMcrypt.Text = "MCrypt";
+            this.toolTip1.SetToolTip(this.lblMcrypt, resources.GetString("lblMcrypt.ToolTip"));
             // 
             // aboutLink
             // 
-            this.aboutLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.aboutLink.AutoSize = true;
+            resources.ApplyResources(this.aboutLink, "aboutLink");
             this.aboutLink.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
             this.aboutLink.LinkColor = System.Drawing.Color.RoyalBlue;
-            this.aboutLink.Location = new System.Drawing.Point(247, 9);
             this.aboutLink.Name = "aboutLink";
-            this.aboutLink.Size = new System.Drawing.Size(12, 13);
-            this.aboutLink.TabIndex = 7;
             this.aboutLink.TabStop = true;
-            this.aboutLink.Text = "?";
-            this.toolTip1.SetToolTip(this.aboutLink, "About MCrypt");
+            this.toolTip1.SetToolTip(this.aboutLink, resources.GetString("aboutLink.ToolTip"));
             this.aboutLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.aboutLink_LinkClicked);
             // 
             // panelMode
             // 
-            this.panelMode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.panelMode, "panelMode");
             this.panelMode.Controls.Add(this.pictureBox2);
             this.panelMode.Controls.Add(this.rdobtnDecryptAndSave);
             this.panelMode.Controls.Add(this.rdobtnOpenTemp);
             this.panelMode.Controls.Add(this.label3);
-            this.panelMode.Location = new System.Drawing.Point(12, 108);
             this.panelMode.Name = "panelMode";
-            this.panelMode.Size = new System.Drawing.Size(247, 53);
-            this.panelMode.TabIndex = 24;
+            this.toolTip1.SetToolTip(this.panelMode, resources.GetString("panelMode.ToolTip"));
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.pictureBox2, "pictureBox2");
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(20, 20);
-            this.pictureBox2.TabIndex = 14;
             this.pictureBox2.TabStop = false;
+            this.toolTip1.SetToolTip(this.pictureBox2, resources.GetString("pictureBox2.ToolTip"));
             // 
             // rdobtnDecryptAndSave
             // 
-            this.rdobtnDecryptAndSave.AutoSize = true;
-            this.rdobtnDecryptAndSave.Location = new System.Drawing.Point(29, 35);
+            resources.ApplyResources(this.rdobtnDecryptAndSave, "rdobtnDecryptAndSave");
             this.rdobtnDecryptAndSave.Name = "rdobtnDecryptAndSave";
-            this.rdobtnDecryptAndSave.Size = new System.Drawing.Size(151, 17);
-            this.rdobtnDecryptAndSave.TabIndex = 0;
             this.rdobtnDecryptAndSave.TabStop = true;
-            this.rdobtnDecryptAndSave.Text = "Decrypt and save the file";
+            this.toolTip1.SetToolTip(this.rdobtnDecryptAndSave, resources.GetString("rdobtnDecryptAndSave.ToolTip"));
             this.rdobtnDecryptAndSave.UseVisualStyleBackColor = true;
             // 
             // rdobtnOpenTemp
             // 
-            this.rdobtnOpenTemp.AutoSize = true;
-            this.rdobtnOpenTemp.Location = new System.Drawing.Point(29, 16);
+            resources.ApplyResources(this.rdobtnOpenTemp, "rdobtnOpenTemp");
             this.rdobtnOpenTemp.Name = "rdobtnOpenTemp";
-            this.rdobtnOpenTemp.Size = new System.Drawing.Size(154, 17);
-            this.rdobtnOpenTemp.TabIndex = 0;
             this.rdobtnOpenTemp.TabStop = true;
-            this.rdobtnOpenTemp.Text = "Open the file temporarily";
+            this.toolTip1.SetToolTip(this.rdobtnOpenTemp, resources.GetString("rdobtnOpenTemp.ToolTip"));
             this.rdobtnOpenTemp.UseVisualStyleBackColor = true;
             this.rdobtnOpenTemp.CheckedChanged += new System.EventHandler(this.rdobtnOpenTemp_CheckedChanged);
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 0);
+            resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 13);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "Mode:";
+            this.toolTip1.SetToolTip(this.label3, resources.GetString("label3.ToolTip"));
             // 
             // pbKey
             // 
+            resources.ApplyResources(this.pbKey, "pbKey");
             this.pbKey.Image = global::MCrypt.Properties.Resources.key20;
-            this.pbKey.Location = new System.Drawing.Point(12, 58);
             this.pbKey.Name = "pbKey";
-            this.pbKey.Size = new System.Drawing.Size(20, 20);
-            this.pbKey.TabIndex = 11;
             this.pbKey.TabStop = false;
-            // 
-            // saveDirectoryUC
-            // 
-            this.saveDirectoryUC.BackColor = System.Drawing.Color.White;
-            this.saveDirectoryUC.Font = new System.Drawing.Font("Segoe UI Emoji", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveDirectoryUC.InitialDirectory = null;
-            this.saveDirectoryUC.Location = new System.Drawing.Point(12, 172);
-            this.saveDirectoryUC.Name = "saveDirectoryUC";
-            this.saveDirectoryUC.Size = new System.Drawing.Size(247, 85);
-            this.saveDirectoryUC.TabIndex = 27;
+            this.toolTip1.SetToolTip(this.pbKey, resources.GetString("pbKey.ToolTip"));
             // 
             // lblStatus
             // 
-            this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.lblStatus, "lblStatus");
             this.lblStatus.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblStatus.Location = new System.Drawing.Point(40, 271);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(138, 25);
-            this.lblStatus.TabIndex = 28;
-            this.lblStatus.Text = "Status";
-            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.lblStatus, resources.GetString("lblStatus.ToolTip"));
+            // 
+            // saveDirectoryUC
+            // 
+            resources.ApplyResources(this.saveDirectoryUC, "saveDirectoryUC");
+            this.saveDirectoryUC.BackColor = System.Drawing.Color.White;
+            this.saveDirectoryUC.InitialDirectory = null;
+            this.saveDirectoryUC.Name = "saveDirectoryUC";
+            this.toolTip1.SetToolTip(this.saveDirectoryUC, resources.GetString("saveDirectoryUC.ToolTip"));
             // 
             // DecryptForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(271, 307);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.saveDirectoryUC);
             this.Controls.Add(this.panelMode);
@@ -230,13 +184,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pbKey);
             this.Controls.Add(this.lblMcrypt);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DecryptForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "MCrypt Decrypt";
+            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DecryptUI_FormClosing);
             this.panelMode.ResumeLayout(false);
             this.panelMode.PerformLayout();

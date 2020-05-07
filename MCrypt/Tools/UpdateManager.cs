@@ -7,6 +7,7 @@ using MUpdate;
 using System.Reflection;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace MCrypt.Tools
 {
@@ -68,7 +69,10 @@ namespace MCrypt.Tools
         /// </summary>
         public string Language
         {
-            get { return ""; }
+            get
+            {
+                return "fr";
+            }
         }
         #endregion
 
@@ -76,7 +80,7 @@ namespace MCrypt.Tools
         MUpdater updater;
         public UpdateManager(Form _context = null)
         {
-            this.context = _context;
+            context = _context;
 
             updater = new MUpdater(this);
         }
@@ -84,6 +88,11 @@ namespace MCrypt.Tools
         public void CheckForUpdatesAsync()
         {
             updater.DoUpdateAsync();
+        }
+
+        public void CheckForUpdatesSync()
+        {
+            updater.DoUpdateSync();
         }
     }
 }

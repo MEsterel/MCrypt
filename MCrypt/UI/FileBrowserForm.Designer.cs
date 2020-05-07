@@ -47,141 +47,93 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.label1, "label1");
             this.label1.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.label1.Location = new System.Drawing.Point(6, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 32);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "MCrypt";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.label2, "label2");
             this.label2.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.label2.Location = new System.Drawing.Point(92, 12);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(123, 30);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "File browser";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(38, 139);
+            resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Mode:";
             // 
             // comboBoxMode
             // 
             this.comboBoxMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMode.FormattingEnabled = true;
             this.comboBoxMode.Items.AddRange(new object[] {
-            "Auto",
-            "Encrypt",
-            "Decrypt"});
-            this.comboBoxMode.Location = new System.Drawing.Point(41, 155);
+            resources.GetString("comboBoxMode.Items"),
+            resources.GetString("comboBoxMode.Items1"),
+            resources.GetString("comboBoxMode.Items2")});
+            resources.ApplyResources(this.comboBoxMode, "comboBoxMode");
             this.comboBoxMode.Name = "comboBoxMode";
-            this.comboBoxMode.Size = new System.Drawing.Size(89, 21);
-            this.comboBoxMode.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.comboBoxMode, "Select the crypt mode for the file you want to compute.");
+            this.toolTip1.SetToolTip(this.comboBoxMode, resources.GetString("comboBoxMode.ToolTip"));
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(38, 55);
+            resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(71, 13);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "File / Folder:";
             // 
             // txtFileName
             // 
-            this.txtFileName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFileName.Location = new System.Drawing.Point(41, 71);
+            resources.ApplyResources(this.txtFileName, "txtFileName");
             this.txtFileName.Name = "txtFileName";
-            this.txtFileName.Size = new System.Drawing.Size(361, 22);
-            this.txtFileName.TabIndex = 0;
             this.txtFileName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtFileName_MouseDoubleClick);
             // 
             // btnStart
             // 
-            this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStart.Location = new System.Drawing.Point(315, 150);
+            resources.ApplyResources(this.btnStart, "btnStart");
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(87, 29);
-            this.btnStart.TabIndex = 3;
-            this.btnStart.Text = "&Compute";
-            this.toolTip1.SetToolTip(this.btnStart, "Compute the selected file.");
+            this.toolTip1.SetToolTip(this.btnStart, resources.GetString("btnStart.ToolTip"));
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // aboutLink
             // 
-            this.aboutLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.aboutLink.AutoSize = true;
+            resources.ApplyResources(this.aboutLink, "aboutLink");
             this.aboutLink.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
             this.aboutLink.LinkColor = System.Drawing.Color.RoyalBlue;
-            this.aboutLink.Location = new System.Drawing.Point(390, 9);
             this.aboutLink.Name = "aboutLink";
-            this.aboutLink.Size = new System.Drawing.Size(12, 13);
-            this.aboutLink.TabIndex = 4;
             this.aboutLink.TabStop = true;
-            this.aboutLink.Text = "?";
-            this.toolTip1.SetToolTip(this.aboutLink, "About MCrypt");
+            this.toolTip1.SetToolTip(this.aboutLink, resources.GetString("aboutLink.ToolTip"));
             this.aboutLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.aboutLink_LinkClicked);
             // 
             // btnBrowseFile
             // 
             this.btnBrowseFile.Image = global::MCrypt.Properties.Resources.file20;
-            this.btnBrowseFile.Location = new System.Drawing.Point(41, 99);
+            resources.ApplyResources(this.btnBrowseFile, "btnBrowseFile");
             this.btnBrowseFile.Name = "btnBrowseFile";
-            this.btnBrowseFile.Size = new System.Drawing.Size(98, 28);
-            this.btnBrowseFile.TabIndex = 1;
-            this.btnBrowseFile.Text = " Browse file";
-            this.btnBrowseFile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBrowseFile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.toolTip1.SetToolTip(this.btnBrowseFile, "Browse a file...");
+            this.toolTip1.SetToolTip(this.btnBrowseFile, resources.GetString("btnBrowseFile.ToolTip"));
             this.btnBrowseFile.UseVisualStyleBackColor = true;
             this.btnBrowseFile.Click += new System.EventHandler(this.btnBrowseFile_Click);
             // 
             // btnBrowseDirectory
             // 
             this.btnBrowseDirectory.Image = global::MCrypt.Properties.Resources.folder20;
-            this.btnBrowseDirectory.Location = new System.Drawing.Point(145, 99);
+            resources.ApplyResources(this.btnBrowseDirectory, "btnBrowseDirectory");
             this.btnBrowseDirectory.Name = "btnBrowseDirectory";
-            this.btnBrowseDirectory.Size = new System.Drawing.Size(117, 28);
-            this.btnBrowseDirectory.TabIndex = 11;
-            this.btnBrowseDirectory.Text = " Browse folder";
-            this.btnBrowseDirectory.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBrowseDirectory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.toolTip1.SetToolTip(this.btnBrowseDirectory, "Browse a folder...");
+            this.toolTip1.SetToolTip(this.btnBrowseDirectory, resources.GetString("btnBrowseDirectory.ToolTip"));
             this.btnBrowseDirectory.UseVisualStyleBackColor = true;
             this.btnBrowseDirectory.Click += new System.EventHandler(this.btnBrowseDirectory_Click);
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::MCrypt.Properties.Resources.search20;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 55);
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(20, 20);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             // 
             // FileBrowserForm
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(414, 191);
             this.Controls.Add(this.btnBrowseDirectory);
             this.Controls.Add(this.aboutLink);
             this.Controls.Add(this.pictureBox1);
@@ -194,14 +146,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.DoubleBuffered = true;
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(9000, 230);
             this.MinimizeBox = false;
             this.Name = "FileBrowserForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MCrypt";
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.FileBrowserUI_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.FileBrowserUI_DragEnter);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

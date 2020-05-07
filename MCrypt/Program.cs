@@ -3,10 +3,12 @@ using MCrypt.Tools;
 using MCrypt.UI;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -32,8 +34,14 @@ namespace MCrypt
 
                 Output.Print("MCrypt v" + Application.ProductVersion.ToString());
                 Output.Print("Core load");
-                Output.Print("- Changed thread culture to en-US");
-                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
+
+                Output.Print("- UI culture: " + Thread.CurrentThread.CurrentUICulture);
+                
+                if (Thread.CurrentThread.CurrentCulture.Name.Contains("fr"))
+                {
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("fr");
+                    Output.Print("- Set UI culture to: fr");
+                }
 
                 Output.Print("- Load UI styles");
                 Application.EnableVisualStyles();
@@ -50,8 +58,7 @@ namespace MCrypt
                 Output.Print("Successful core load");
 
                 // Check for updates ///////////////////////////
-                Output.Print("Checking for updates asynchronously");
-                checkUpdates();
+                firstCheckUpdatesAsync();
 
                 // Check for args //////////////////////////////
                 Output.Print("Checking launch args...");
@@ -132,15 +139,41 @@ namespace MCrypt
             }
         }
 
-        private static void checkUpdates()
+        private static void firstCheckUpdatesAsync()
         {
+            Output.Print("Checking for updates async");
             updateManager = new UpdateManager();
             updateManager.CheckForUpdatesAsync();
+        }
+
+        public static void checkUpdatesSync()
+        {
+            Output.Print("Checking for updates sync");
+            updateManager.CheckForUpdatesSync();
         }
 
         private static Assembly FindDLL(object s, ResolveEventArgs a)
         {
             Output.Print("Requesting DLL \"" + a.Name.Substring(0, a.Name.IndexOf(",")) + "\"");
+
+            //try
+            //{
+            //    AssemblyName MissingAssembly = new AssemblyName(a.Name);
+            //    CultureInfo ci = MissingAssembly.CultureInfo;
+
+            //    string[] resourceNames = Assembly.GetExecutingAssembly().GetManifestResourceNames();
+            //    foreach (string r in resourceNames) { Output.Print(r); }
+
+
+            //    string resourceName = "MCrypt.Resources." + ci.Name.Replace("-", "_") + "." + MissingAssembly.Name + ".dll";
+
+            //    using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
+            //    {
+            //        Byte[] assemblyData = new Byte[stream.Length];
+            //        stream.Read(assemblyData, 0, assemblyData.Length);
+            //        return Assembly.Load(assemblyData);
+            //    }
+            //}
 
             string resourceName = new AssemblyName(a.Name).Name + ".dll";
             string resource = Array.Find(Assembly.GetExecutingAssembly().GetManifestResourceNames(), element => element.EndsWith(resourceName));
@@ -151,6 +184,7 @@ namespace MCrypt
                 stream.Read(assemblyData, 0, assemblyData.Length);
                 return Assembly.Load(assemblyData);
             }
+
         }
 
         private static void runExceptionMessageHandler(Exception ex)

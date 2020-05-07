@@ -3097,7 +3097,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:MUpdate, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:MUpdate, Version=3.0.4.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_EF5580B9349032C5D1A4ABF96BB7283F"
@@ -3288,15 +3288,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:MCrypt"
-        "ProductCode" = "8:{8B5D645C-AE82-47AF-A06D-0D92AEEBBA7C}"
-        "PackageCode" = "8:{F50E7C9A-2E98-4604-8D54-55B111F00146}"
+        "ProductCode" = "8:{60E21C5C-CBFE-47F9-9B6C-94C9D059D9C3}"
+        "PackageCode" = "8:{4F964027-DED3-49C3-B2F6-C1B156091F14}"
         "UpgradeCode" = "8:{CC6792FD-939F-41E4-8FDF-E0FA49E895D3}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.1.10"
+        "ProductVersion" = "8:1.2.0"
         "Manufacturer" = "8:Matthieu Badoy"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

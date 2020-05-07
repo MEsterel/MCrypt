@@ -4,8 +4,10 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,6 +19,12 @@ namespace MCrypt.UI
 
         public FolderTempOpenForm(string folderPath)
         {
+            if (Thread.CurrentThread.CurrentCulture.Name.Contains("fr"))
+            {
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo("fr");
+                Output.Print("- Set UI culture to: fr");
+            }
+
             InitializeComponent();
 
             FolderPath = folderPath;

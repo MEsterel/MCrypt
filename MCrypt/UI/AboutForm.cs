@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Threading;
+using System.Globalization;
+using MCrypt.Resources;
+using MCrypt.Tools;
 
 namespace MCrypt.UI
 {
@@ -16,12 +20,18 @@ namespace MCrypt.UI
     {
         public AboutForm()
         {
+            if (Thread.CurrentThread.CurrentCulture.Name.Contains("fr"))
+            {
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo("fr");
+                Output.Print("- Set UI culture to: fr");
+            }
+
             InitializeComponent();
             
             var versionInfo = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location);
 
-            this.lblVersion.Text = "Version: " + versionInfo.ProductVersion;
-            this.lblAuthor.Text = "Author: " + versionInfo.CompanyName;
+            this.lblVersion.Text = lang.Version + " " + versionInfo.ProductVersion;
+            this.lblAuthor.Text = lang.Author + " " + versionInfo.CompanyName;
             this.lblCopyright.Text = versionInfo.LegalCopyright;
 
             Assembly assembly = Assembly.GetExecutingAssembly();
@@ -30,7 +40,7 @@ namespace MCrypt.UI
                 .OfType<AssemblyDescriptionAttribute>()
                 .FirstOrDefault();
             if (descriptionAttribute != null)
-                this.lblDescription.Text = descriptionAttribute.Description;
+                this.lblDescription.Text = lang.AboutMessage;
 
         }
 
@@ -38,6 +48,17 @@ namespace MCrypt.UI
         {
             if (e.KeyData == Keys.Enter || e.KeyData == Keys.Escape)
                 this.Close();
+        }
+
+        private void okBtn_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            Program.checkUpdatesSync();
         }
     }
 }

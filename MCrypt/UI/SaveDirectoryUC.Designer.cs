@@ -53,10 +53,10 @@
             this.rdobtnSaveIsSource.Checked = true;
             this.rdobtnSaveIsSource.Location = new System.Drawing.Point(29, 16);
             this.rdobtnSaveIsSource.Name = "rdobtnSaveIsSource";
-            this.rdobtnSaveIsSource.Size = new System.Drawing.Size(208, 19);
+            this.rdobtnSaveIsSource.Size = new System.Drawing.Size(199, 19);
             this.rdobtnSaveIsSource.TabIndex = 1;
             this.rdobtnSaveIsSource.TabStop = true;
-            this.rdobtnSaveIsSource.Text = "Output directory = Source directory";
+            this.rdobtnSaveIsSource.Text = "Dossier de sortie = dossier source";
             this.rdobtnSaveIsSource.UseVisualStyleBackColor = true;
             // 
             // ckboxKeepOriginal
@@ -64,9 +64,9 @@
             this.ckboxKeepOriginal.AutoSize = true;
             this.ckboxKeepOriginal.Location = new System.Drawing.Point(29, 64);
             this.ckboxKeepOriginal.Name = "ckboxKeepOriginal";
-            this.ckboxKeepOriginal.Size = new System.Drawing.Size(164, 19);
+            this.ckboxKeepOriginal.Size = new System.Drawing.Size(196, 19);
             this.ckboxKeepOriginal.TabIndex = 5;
-            this.ckboxKeepOriginal.Text = "Keep a copy of the original";
+            this.ckboxKeepOriginal.Text = "Conserver une copie de l\'original";
             this.ckboxKeepOriginal.UseVisualStyleBackColor = true;
             // 
             // rdobtnSaveIsOther
@@ -95,9 +95,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(26, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 15);
+            this.label1.Size = new System.Drawing.Size(69, 15);
             this.label1.TabIndex = 23;
-            this.label1.Text = "Save:";
+            this.label1.Text = "Enregistrer :";
             // 
             // txtSaveDirectory
             // 

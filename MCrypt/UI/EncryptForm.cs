@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MCrypt.Tools;
 using MCrypt.Cryptography;
+using System.Threading;
+using System.Globalization;
+using MCrypt.Resources;
 
 namespace MCrypt.UI
 {
@@ -34,6 +37,12 @@ namespace MCrypt.UI
 
         public EncryptForm(string path, bool mouseStartLocation = true)
         {
+            if (Thread.CurrentThread.CurrentCulture.Name.Contains("fr"))
+            {
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo("fr");
+                Output.Print("- Set UI culture to: fr");
+            }
+
             Output.Print("Initializing Encrypt window components.");
             InitializeComponent();
 
@@ -64,19 +73,19 @@ namespace MCrypt.UI
             Output.Print("Checking passwords.");
             if (tbPassword.Text == "")
             {
-                MessageBox.Show(this, "Please enter a password.", this.Text + " - Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                Output.Print("No passwords entered.", Level.Warning);
+                MessageBox.Show(this, lang.PleaseEnterAPassword, this.Text + " - " + lang.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Output.Print("No password entered", Level.Warning);
                 return;
             }
             else if (tbRePassword.Text == "")
             {
-                MessageBox.Show(this, "Please re-enter the password.", this.Text + " - Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                Output.Print("No passwords entered.", Level.Warning);
+                MessageBox.Show(this, lang.PleaseConfirmPassword, this.Text + " - " + lang.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Output.Print("No confirm password entered.", Level.Warning);
                 return;
             }
             else if (tbPassword.Text != tbRePassword.Text)
             {
-                MessageBox.Show(this, "Entered passwords do not match.", this.Text + " - Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(this, lang.PasswordsDoNotMatch, this.Text + " - " + lang.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Output.Print("Passwords do not match.", Level.Warning);
                 return;
             }
@@ -84,7 +93,7 @@ namespace MCrypt.UI
             // Check input file path for the last time
             if (!File.Exists(inputPath) && !Directory.Exists(inputPath))
             {
-                MessageBox.Show(this, "Original object to crypt has been moved or deleted before encryption.", this.Text + " - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, lang.OriginalObjectToEnryptMoved, this.Text + " - " + lang.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Close();
             }
 
@@ -115,8 +124,8 @@ namespace MCrypt.UI
             {
                 Output.Print("Output path already exists.", Level.Warning);
                 if (MessageBox.Show(this,
-                    "A file named \"" + Path.GetFileName(simulatedOutputFilePath) + "\" already exists. Do you want to replace it?",
-                    this.Text + " - Warning",
+                    lang.AFileNamed + " \"" + Path.GetFileName(simulatedOutputFilePath) + "\" " + lang.alreadyExistsReplaceIt,
+                    this.Text + " - " + lang.Warning,
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Warning,
                     MessageBoxDefaultButton.Button2) == DialogResult.Yes)
@@ -131,16 +140,9 @@ namespace MCrypt.UI
 
             UIWorking();
 
-            lblStatus.Text = "Encrypting the " + (isInputPathDirectory ? "folder" : "file");
+            lblStatus.Text = lang.EncryptingThe + " " + (isInputPathDirectory ? lang.folder : lang.file);
 
             bw.RunWorkerAsync(new CryptArgs(inputPath, Path.GetDirectoryName(simulatedOutputFilePath), password, isInputPathDirectory));
-
-            //else // If it is a directory
-            //{
-            //    //Output.Print("Input path is an archive: zip it.");
-            //    //tempArchiveLocation = Files.GetTempFilePath(); // Get temp path
-            //    //Tools.DirectoryZipper.ZipDirectory(inputFilePath, tempArchiveLocation, true); // Store zipped directory in temp place
-            //    //finalInputFilePath = tempArchiveLocation;
         }
 
         void bw_DoWork(object sender, DoWorkEventArgs e)
@@ -157,7 +159,7 @@ namespace MCrypt.UI
             {
                 UIReady();
 
-                MessageBox.Show(this, "An error occured during file encryption.\nDetails: " + e.Error.Message, this.Text + " - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, lang.AnErrorOccuredDuringEncryption + "\n" + lang.Details + " " + e.Error.Message, this.Text + " - " + lang.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 try { File.Delete(simulatedOutputFilePath); }
                 catch { }
@@ -223,7 +225,7 @@ namespace MCrypt.UI
         {
             if (cancelClose)
             {
-                if (MessageBox.Show(this, "MCrypt is hard working: closing it could result in a loss of data.\nDo you REALLY want to exit?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+                if (MessageBox.Show(this, lang.MCryptHardWorkingPrompt, this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
                 == DialogResult.No)
                 {
                     e.Cancel = true;

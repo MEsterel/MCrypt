@@ -22,7 +22,6 @@ namespace MCrypt.Cryptography
 
         public static CrypterInfo EncryptFile(string inputPath, string outputDirectory, string password, bool isDirectory)
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
             Output.Print("ENCRYPTING: " + inputPath);
 
             Stopwatch stopwatch = new Stopwatch();
@@ -213,7 +212,6 @@ namespace MCrypt.Cryptography
 
         public static CrypterInfo DecryptFile(string inputFilePath, string outputDirectory, string password)
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
             Output.Print("DECRYPTING: " + inputFilePath);
 
             Stopwatch stopwatch = new Stopwatch();
@@ -271,18 +269,18 @@ namespace MCrypt.Cryptography
                     // RAPPEL du format de metadataBody : Version de MCrypt, Type[File/Directory], extension, Hash, Salt, Iterations, BatchesLength
 
 
-                    // Vérification de la version
-                    string mcryptVersion = metadataBodyStringSplit[0];
-                    if (mcryptVersion != Application.ProductVersion)
-                    {
-                        Output.Print(string.Format("File encrypted with a previous version of MCrypt ({0}). Decrypting with the according process.", mcryptVersion));
+                    // Vérification de la version - DESACTIVE POUR LE MOMENT
+                    //string mcryptVersion = metadataBodyStringSplit[0];
+                    //if (mcryptVersion != Application.ProductVersion)
+                    //{
+                    //    Output.Print(string.Format("File encrypted with a previous version of MCrypt ({0}). Decrypting with the according process.", mcryptVersion));
 
-                        source.Flush();
-                        source.Close();
+                    //    source.Flush();
+                    //    source.Close();
 
-                        // Pas encore de version antérieure...
-                    }
-                    Output.Print("Current MCrypt version!");
+                    //    // Pas encore de version antérieure...
+                    //}
+                    //Output.Print("Current MCrypt version!");
 
 
                     // Vérification du mot de passe
@@ -432,7 +430,6 @@ namespace MCrypt.Cryptography
         /// <param name="password"></param>
         public static void Obsolete_DecryptFile030(string inputFilePath, string outputFilePath, string password)
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
 
             try
             {

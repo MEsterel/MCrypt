@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.IO;
+using MCrypt.Resources;
 
 namespace MCrypt.UI
 {
@@ -53,7 +54,7 @@ namespace MCrypt.UI
             CommonOpenFileDialog fileDialog = new CommonOpenFileDialog
             {
                 EnsurePathExists = true,
-                Title = "Choose save location",
+                Title = lang.ChooseSaveLocation,
                 IsFolderPicker = true
             };
 
@@ -89,14 +90,14 @@ namespace MCrypt.UI
             if (OtherDirectory == "") // If no path is indicated
             {
                 Output.Print("No output path indicated.", Level.Warning);
-                MessageBox.Show(this, "Please specify the location of the output file.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(this, lang.PleaseSpecifyOutputLocation, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
             if (!Directory.Exists(Path.GetDirectoryName(OtherDirectory))) // If output directory does not exist.
             {
                 Output.Print("The specified directory does not exist.", Level.Warning);
-                MessageBox.Show(this, "The specified directory does not exist.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(this, lang.SpecifiedDirectoryDoesntExist, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 

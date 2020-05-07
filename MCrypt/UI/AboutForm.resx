@@ -117,7 +117,252 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblMCrypt.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblMCrypt.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 18pt</value>
+  </data>
+  <data name="lblMCrypt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>78, 12</value>
+  </data>
+  <data name="lblMCrypt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 32</value>
+  </data>
+  <data name="lblMCrypt.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblMCrypt.Text" xml:space="preserve">
+    <value>MCrypt</value>
+  </data>
+  <data name="&gt;&gt;lblMCrypt.Name" xml:space="preserve">
+    <value>lblMCrypt</value>
+  </data>
+  <data name="&gt;&gt;lblMCrypt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMCrypt.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblMCrypt.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblVersion.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblVersion.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
+  </data>
+  <data name="lblVersion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>81, 44</value>
+  </data>
+  <data name="lblVersion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 17</value>
+  </data>
+  <data name="lblVersion.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblVersion.Text" xml:space="preserve">
+    <value>Version: {0.0.0.0}</value>
+  </data>
+  <data name="&gt;&gt;lblVersion.Name" xml:space="preserve">
+    <value>lblVersion</value>
+  </data>
+  <data name="&gt;&gt;lblVersion.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblVersion.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblVersion.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblAuthor.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAuthor.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
+  </data>
+  <data name="lblAuthor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>81, 61</value>
+  </data>
+  <data name="lblAuthor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 17</value>
+  </data>
+  <data name="lblAuthor.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblAuthor.Text" xml:space="preserve">
+    <value>Author: {0}</value>
+  </data>
+  <data name="&gt;&gt;lblAuthor.Name" xml:space="preserve">
+    <value>lblAuthor</value>
+  </data>
+  <data name="&gt;&gt;lblAuthor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAuthor.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblAuthor.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblCopyright.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblCopyright.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
+  </data>
+  <data name="lblCopyright.Location" type="System.Drawing.Point, System.Drawing">
+    <value>81, 78</value>
+  </data>
+  <data name="lblCopyright.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 17</value>
+  </data>
+  <data name="lblCopyright.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblCopyright.Text" xml:space="preserve">
+    <value>Copyright {0}</value>
+  </data>
+  <data name="&gt;&gt;lblCopyright.Name" xml:space="preserve">
+    <value>lblCopyright</value>
+  </data>
+  <data name="&gt;&gt;lblCopyright.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCopyright.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblCopyright.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="pbLogo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
+  <data name="pbLogo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-102, 12</value>
+  </data>
+  <data name="pbLogo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 298</value>
+  </data>
+  <data name="pbLogo.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="pbLogo.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pbLogo.Name" xml:space="preserve">
+    <value>pbLogo</value>
+  </data>
+  <data name="&gt;&gt;pbLogo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pbLogo.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pbLogo.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblDescription.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="lblDescription.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="lblDescription.Location" type="System.Drawing.Point, System.Drawing">
+    <value>81, 107</value>
+  </data>
+  <data name="lblDescription.Size" type="System.Drawing.Size, System.Drawing">
+    <value>332, 177</value>
+  </data>
+  <data name="lblDescription.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblDescription.Text" xml:space="preserve">
+    <value>[description]</value>
+  </data>
+  <data name="&gt;&gt;lblDescription.Name" xml:space="preserve">
+    <value>lblDescription</value>
+  </data>
+  <data name="&gt;&gt;lblDescription.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDescription.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblDescription.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="okBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="okBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>338, 287</value>
+  </data>
+  <data name="okBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="okBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="okBtn.Text" xml:space="preserve">
+    <value>&amp;OK</value>
+  </data>
+  <data name="&gt;&gt;okBtn.Name" xml:space="preserve">
+    <value>okBtn</value>
+  </data>
+  <data name="&gt;&gt;okBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;okBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;okBtn.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="button2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="button2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>206, 287</value>
+  </data>
+  <data name="button2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 23</value>
+  </data>
+  <data name="button2.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="button2.Text" xml:space="preserve">
+    <value>Check for updates</value>
+  </data>
+  <data name="&gt;&gt;button2.Name" xml:space="preserve">
+    <value>button2</value>
+  </data>
+  <data name="&gt;&gt;button2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>425, 322</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAoAEBAAAAAAIABoBAAApgAAABgYAAAAACAAiAkAAA4FAAAgIAAAAAAgAKgQAACWDgAAMDAAAAAA
@@ -27523,5 +27768,17 @@
         ///////////////////////////gAAAAAAH/////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////w==
 </value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>About MCrypt</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>AboutForm</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

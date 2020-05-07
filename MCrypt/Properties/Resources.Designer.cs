@@ -91,6 +91,26 @@ namespace MCrypt.Properties {
         }
         
         /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] fr_MCrypt_resources {
+            get {
+                object obj = ResourceManager.GetObject("fr_MCrypt_resources", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] fr_MUpdate_resources {
+            get {
+                object obj = ResourceManager.GetObject("fr_MUpdate_resources", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap key20 {

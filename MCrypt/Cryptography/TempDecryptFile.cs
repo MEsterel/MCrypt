@@ -15,6 +15,7 @@ using System.Web;
 using SHDocVw;
 using System.Windows.Forms;
 using System.Drawing;
+using MCrypt.Resources;
 
 namespace MCrypt.Cryptography
 {
@@ -72,19 +73,19 @@ namespace MCrypt.Cryptography
             try
             {
                 //// 1. PREPARE TEMP DIRECTORY
-                bgw.ProgressChanged(0, "Preparing");
+                bgw.ProgressChanged(0, lang.Preparing);
 
                 // Get temp working directory
                 tempPath = Files.GetTempDirectoryPath();
 
 
                 //// 2. DECRYPT FILE in tempFilePath 
-                bgw.ProgressChanged(1, "Decrypting");
+                bgw.ProgressChanged(1, lang.Decrypting);
                 decryptedInfo = FileCrypter.DecryptFile(inputFilePath, tempPath, password);
 
 
                 //// 3. LAUNCH DECRYPTED FILE 
-                bgw.ProgressChanged(40, "Opening");
+                bgw.ProgressChanged(40, lang.Opening);
                 ProcessStartInfo procStartInfo = new ProcessStartInfo(decryptedInfo.OutputPath);
 
                 Process fileProc = new Process
@@ -96,7 +97,7 @@ namespace MCrypt.Cryptography
 
                 if (!decryptedInfo.IsDirectory)
                 {
-                    bgw.ProgressChanged(50, "Waiting for the file to exit");
+                    bgw.ProgressChanged(50, lang.WaitingForTheFileToExit);
                     try // Try to watch for the process()
                     {
                         fileProc.WaitForExit(); // Wait for the process to exit
@@ -141,12 +142,12 @@ namespace MCrypt.Cryptography
 
 
                 //// 4. ENCRYPT EDITED TEMP FILE in tempCryptedPath 
-                bgw.ProgressChanged(60, "Encrypting back the " + (decryptedInfo.IsDirectory? "directory" : "file"));
+                bgw.ProgressChanged(60, lang.EncryptingBackThe + " " + (decryptedInfo.IsDirectory? lang.folder : lang.file));
                 CrypterInfo encryptedInfo = FileCrypter.EncryptFile(decryptedInfo.OutputPath, Path.GetDirectoryName(decryptedInfo.OutputPath), password, decryptedInfo.IsDirectory); // Use same password and encrypt in same temp folder
 
 
                 //// 5. REPLACE ORIGINAL (inputFilePath) BY NEW (tempCryptedFile) 
-                bgw.ProgressChanged(100, "Finalizing");
+                bgw.ProgressChanged(100, lang.Finalizing);
                 File.Delete(inputFilePath);
                 File.Copy(encryptedInfo.OutputPath, inputFilePath);
             }

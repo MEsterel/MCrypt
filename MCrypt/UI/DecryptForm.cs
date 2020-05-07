@@ -12,6 +12,9 @@ using MCrypt.Exceptions;
 using MCrypt.Tools;
 using MCrypt.Cryptography;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Threading;
+using System.Globalization;
+using MCrypt.Resources;
 
 namespace MCrypt.UI
 {
@@ -44,6 +47,12 @@ namespace MCrypt.UI
         /// <param name="mouseStartLocation">True: start location at mouse position. False: start location at center screen.</param>
         public DecryptForm(string path, bool mouseStartLocation = true)
         {
+            if (Thread.CurrentThread.CurrentCulture.Name.Contains("fr"))
+            {
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo("fr");
+                Output.Print("- Set UI culture to: fr");
+            }
+
             InitializeComponent();
             UIReady();
 
@@ -65,14 +74,14 @@ namespace MCrypt.UI
             // Check password
             if (tbPassword.Text == "")
             {
-                MessageBox.Show(this, "Please enter your password.", this.Text + " - Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(this, lang.PleaseEnterYourPassword, this.Text + " - " + lang.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             // Check input file path for the last time
             if (!File.Exists(inputFilePath))
             {
-                MessageBox.Show(this, "Original file has been moved or deleted before decryption.", this.Text + " - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, lang.OriginalFileMovedBeforeDecryption, this.Text + " - " + lang.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Close();
             }
 
@@ -109,7 +118,7 @@ namespace MCrypt.UI
 
                 // Decrypt !
                 UIWorking();
-                lblStatus.Text = "Decrypting";
+                lblStatus.Text = lang.Decrypting;
                 bwSave.RunWorkerAsync(new CryptArgs(inputFilePath, outputDirectory, password));
             }
             else
@@ -153,11 +162,11 @@ namespace MCrypt.UI
             if (e.Error != null) // If there is an error
             {
                 if (e.Error is WrongPasswordException)
-                    MessageBox.Show(this, "Wrong password.", this.Text + " - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, lang.WrongPassword, this.Text + " - " + lang.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else if (e.Error is NotMCryptFileException)
-                    MessageBox.Show(this, "The file to decrypt is not a MCrypt encrypted file.", this.Text + " - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, lang.TheFileToDecryptIsNotMCryptFile, this.Text + " - " + lang.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
-                    MessageBox.Show(this, "An error occured during file decryption.\nDetails: " + e.Error.Message, this.Text + " - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, lang.AnErrorOccuredDuringDecryption + "\n" + lang.Details + " " + e.Error.Message, this.Text + " - " + lang.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 tbPassword.Clear();
                 tbPassword.Select();
@@ -203,11 +212,11 @@ namespace MCrypt.UI
             {
                 UIReady();
                 if (e.Error is WrongPasswordException)
-                    MessageBox.Show(this, "Wrong password.", this.Text + " - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, lang.WrongPassword, this.Text + " - " + lang.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else if (e.Error is NotMCryptFileException)
-                    MessageBox.Show(this, "The file to decrypt is not a MCrypt encrypted file.", this.Text + " - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, lang.TheFileToDecryptIsNotMCryptFile, this.Text + " - " + lang.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
-                    MessageBox.Show(this, "An error occured during file decryption.\nDetails: " + e.Error.Message, this.Text + " - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, lang.AnErrorOccuredDuringDecryption + "\n" + lang.Details + " " + e.Error.Message, this.Text + " - " + lang.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 try { File.Delete(outputDirectory);  }
                 catch { }
@@ -288,7 +297,7 @@ namespace MCrypt.UI
         {
             if (cancelClose)
             {
-                if (MessageBox.Show(this, "MCrypt is hard working: closing it could result in a loss of data.\nDo you REALLY want to exit?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+                if (MessageBox.Show(this, lang.MCryptHardWorkingPrompt, this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
                 == DialogResult.No)
                 {
                     e.Cancel = true;

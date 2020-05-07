@@ -12,6 +12,9 @@ using MCrypt.Tools;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Runtime.Remoting.Contexts;
 using MCrypt.Cryptography;
+using System.Threading;
+using System.Globalization;
+using MCrypt.Resources;
 
 namespace MCrypt.UI
 {
@@ -22,9 +25,16 @@ namespace MCrypt.UI
 
         public FileBrowserForm()
         {
-            InitializeComponent();
+            if (Thread.CurrentThread.CurrentCulture.Name.Contains("fr"))
+            {
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo("fr");
+                Output.Print("- Set UI culture to: fr");
+            }
 
-            comboBoxMode.SelectedItem = "Auto";
+            InitializeComponent();
+            
+
+            comboBoxMode.SelectedIndex = 0;
             AcceptButton = btnStart;
         }
 
@@ -32,7 +42,7 @@ namespace MCrypt.UI
         {
             if (txtFileName.Text == "")
             {
-                MessageBox.Show(this, "Please select a file to compute.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(this, lang.PleaseSelectFile, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -53,23 +63,23 @@ namespace MCrypt.UI
             // If object does not exist
             if (!File.Exists(Path) && !Directory.Exists(Path))
             {
-                MessageBox.Show(this, "The specified object does not exists.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(this, lang.SpecifiedObjectNotFound, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             // If decrypt directory => ERROR
-            if (Files.IsPathDirectory(Path) && comboBoxMode.SelectedItem.ToString() == "Decrypt")
+            if (Files.IsPathDirectory(Path) && comboBoxMode.SelectedItem.ToString() == lang.Decrypt)
             {
-                MessageBox.Show(this, "It is impossible to decrypt a directory.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(this, lang.SpecifiedObjectNotFound, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             // Save mode
-            if (comboBoxMode.SelectedItem.ToString() == "Encrypt")
+            if (comboBoxMode.SelectedIndex == 1)
             {
                 Mode = CryptMode.Encrypt;
             }
-            else if (comboBoxMode.SelectedItem.ToString() == "Decrypt")
+            else if (comboBoxMode.SelectedIndex == 2)
             {
                 Mode = CryptMode.Decrypt;
             }
@@ -89,9 +99,9 @@ namespace MCrypt.UI
                 EnsureFileExists = true,
                 EnsurePathExists = true,
                 Multiselect = false,
-                Title = "Choose a file to compute"
+                Title = lang.ChooseFileToOpen
             };
-            fileDialog.Filters.Add(new CommonFileDialogFilter("All Files", "*.*"));
+            fileDialog.Filters.Add(new CommonFileDialogFilter(lang.AllFiles, "*.*"));
             //fileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
             if (fileDialog.ShowDialog() == CommonFileDialogResult.Ok)
@@ -99,13 +109,15 @@ namespace MCrypt.UI
                 txtFileName.Text = fileDialog.FileName;
                 txtFileName.SelectionStart = txtFileName.TextLength;
             }
+
+            btnStart_Click(sender, e);
         }
 
         private void btnBrowseDirectory_Click(object sender, EventArgs e)
         {
             CommonOpenFileDialog fileDialog = new CommonOpenFileDialog
             {
-                Title = "Choose a folder to encrypt",
+                Title = lang.ChooseFolderToEncrypt,
                 IsFolderPicker = true,
                 EnsurePathExists = true
             };
@@ -116,6 +128,8 @@ namespace MCrypt.UI
                 txtFileName.Text = fileDialog.FileName;
                 txtFileName.SelectionStart = txtFileName.TextLength;
             }
+
+            btnStart_Click(sender, e);
         }
 
         private void FileBrowserUI_DragEnter(object sender, DragEventArgs e)
@@ -130,7 +144,7 @@ namespace MCrypt.UI
 
             if (files.Length > 1)
             {
-                MessageBox.Show(this, "Please drop only one file.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(this, lang.PleaseOnlyDropOneFile, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else // If one file dropped
             {

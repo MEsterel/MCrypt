@@ -35,96 +35,77 @@
             this.lblCopyright = new System.Windows.Forms.Label();
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.lblDescription = new System.Windows.Forms.Label();
+            this.okBtn = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // lblMCrypt
             // 
-            this.lblMCrypt.AutoSize = true;
-            this.lblMCrypt.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.lblMCrypt, "lblMCrypt");
             this.lblMCrypt.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.lblMCrypt.Location = new System.Drawing.Point(78, 12);
             this.lblMCrypt.Name = "lblMCrypt";
-            this.lblMCrypt.Size = new System.Drawing.Size(94, 32);
-            this.lblMCrypt.TabIndex = 1;
-            this.lblMCrypt.Text = "MCrypt";
             // 
             // lblVersion
             // 
-            this.lblVersion.AutoSize = true;
-            this.lblVersion.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVersion.Location = new System.Drawing.Point(81, 44);
+            resources.ApplyResources(this.lblVersion, "lblVersion");
             this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(103, 17);
-            this.lblVersion.TabIndex = 2;
-            this.lblVersion.Text = "Version: {0.0.0.0}";
             // 
             // lblAuthor
             // 
-            this.lblAuthor.AutoSize = true;
-            this.lblAuthor.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAuthor.Location = new System.Drawing.Point(81, 61);
+            resources.ApplyResources(this.lblAuthor, "lblAuthor");
             this.lblAuthor.Name = "lblAuthor";
-            this.lblAuthor.Size = new System.Drawing.Size(69, 17);
-            this.lblAuthor.TabIndex = 2;
-            this.lblAuthor.Text = "Author: {0}";
             // 
             // lblCopyright
             // 
-            this.lblCopyright.AutoSize = true;
-            this.lblCopyright.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCopyright.Location = new System.Drawing.Point(81, 78);
+            resources.ApplyResources(this.lblCopyright, "lblCopyright");
             this.lblCopyright.Name = "lblCopyright";
-            this.lblCopyright.Size = new System.Drawing.Size(84, 17);
-            this.lblCopyright.TabIndex = 2;
-            this.lblCopyright.Text = "Copyright {0}";
             // 
             // pbLogo
             // 
-            this.pbLogo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            resources.ApplyResources(this.pbLogo, "pbLogo");
             this.pbLogo.Image = global::MCrypt.Properties.Resources.lock3_0;
-            this.pbLogo.Location = new System.Drawing.Point(-102, 12);
             this.pbLogo.Name = "pbLogo";
-            this.pbLogo.Size = new System.Drawing.Size(196, 251);
-            this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbLogo.TabIndex = 0;
             this.pbLogo.TabStop = false;
             // 
             // lblDescription
             // 
-            this.lblDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblDescription.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescription.Location = new System.Drawing.Point(81, 107);
+            resources.ApplyResources(this.lblDescription, "lblDescription");
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(332, 159);
-            this.lblDescription.TabIndex = 3;
-            this.lblDescription.Text = "[description]";
+            // 
+            // okBtn
+            // 
+            resources.ApplyResources(this.okBtn, "okBtn");
+            this.okBtn.Name = "okBtn";
+            this.okBtn.UseVisualStyleBackColor = true;
+            this.okBtn.Click += new System.EventHandler(this.okBtn_Click);
+            // 
+            // button2
+            // 
+            resources.ApplyResources(this.button2, "button2");
+            this.button2.Name = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // AboutForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(425, 275);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.okBtn);
             this.Controls.Add(this.lblDescription);
             this.Controls.Add(this.lblCopyright);
             this.Controls.Add(this.lblAuthor);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.lblMCrypt);
             this.Controls.Add(this.pbLogo);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AboutForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "About MCrypt";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AboutUI_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.ResumeLayout(false);
@@ -140,5 +121,7 @@
         private System.Windows.Forms.Label lblAuthor;
         private System.Windows.Forms.Label lblCopyright;
         private System.Windows.Forms.Label lblDescription;
+        private System.Windows.Forms.Button okBtn;
+        private System.Windows.Forms.Button button2;
     }
 }
