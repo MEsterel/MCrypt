@@ -135,7 +135,7 @@ namespace MCrypt
         private static void checkUpdates()
         {
             updateManager = new UpdateManager();
-            updateManager.CheckForUpdatesAsync(false);
+            updateManager.CheckForUpdatesAsync();
         }
 
         private static Assembly FindDLL(object s, ResolveEventArgs a)

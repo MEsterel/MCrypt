@@ -126,9 +126,9 @@ namespace MCrypt.Cryptography
                     {
                         //this parses the name of the process
                         processType = Path.GetFileNameWithoutExtension(ie.FullName).ToLower();
-                        Output.Print("Process type: " + processType);
+                        //Output.Print("Process type: " + processType);
                         locationPath = (new Uri(ie.LocationURL)).LocalPath;
-                        Output.Print("ie Location URL: " + locationPath);
+                        //Output.Print("ie Location URL: " + locationPath);
 
                         //this could also be used for IE windows with processType of "iexplore"
                         if (processType.Equals("explorer") && locationPath == decryptedInfo.OutputPath)
@@ -141,7 +141,7 @@ namespace MCrypt.Cryptography
 
 
                 //// 4. ENCRYPT EDITED TEMP FILE in tempCryptedPath 
-                bgw.ProgressChanged(60, "Encrypting back the file");
+                bgw.ProgressChanged(60, "Encrypting back the " + (decryptedInfo.IsDirectory? "directory" : "file"));
                 CrypterInfo encryptedInfo = FileCrypter.EncryptFile(decryptedInfo.OutputPath, Path.GetDirectoryName(decryptedInfo.OutputPath), password, decryptedInfo.IsDirectory); // Use same password and encrypt in same temp folder
 
 

@@ -63,7 +63,7 @@ namespace MCrypt.Cryptography
 
                 // Salt can be public. We will use the BCrypt salt generator, and then convert it to bytes.
                 string saltString = BCrypt.Net.BCrypt.GenerateSalt();
-                byte[] salt = Encoding.ASCII.GetBytes(saltString);
+                byte[] salt = Encoding.Default.GetBytes(saltString);
                 Output.Print("Salt: " + saltString);
                 Output.Print("Iterations: " + _iterations);
 
@@ -172,11 +172,11 @@ namespace MCrypt.Cryptography
 
                         string metadataString = string.Format("{0}|{1}|{2}|{3}|{4}|{5}|{6}", Application.ProductVersion, isDirectory.ToString(), originalName, passwordHash, saltString, _iterations, metadataBatchesLengthString);
 
-                        byte[] metadata = Encoding.ASCII.GetBytes(metadataString);
+                        byte[] metadata = Encoding.Default.GetBytes(metadataString);
 
                         metadataString = string.Format("{0}MCryptEncryptedData|{1}", metadataString, metadata.Count().ToString().PadLeft(10, '0'));
 
-                        metadata = Encoding.ASCII.GetBytes(metadataString);
+                        metadata = Encoding.Default.GetBytes(metadataString);
 
                         Output.Print(string.Format("METADATA : {0} ({1} bytes)", metadataString, metadata.Length));
                         
@@ -238,7 +238,7 @@ namespace MCrypt.Cryptography
                     // Vérification si ce fichier est bien un fichier MCrypt
                     try
                     {
-                        string metadataHeaderStringCheck = Encoding.ASCII.GetString(metadataHeader);
+                        string metadataHeaderStringCheck = Encoding.Default.GetString(metadataHeader);
                         //Console.WriteLine(metadataHeaderString);
 
                         if (metadataHeaderStringCheck.Split('|')[0] != "MCryptEncryptedData")
@@ -256,7 +256,7 @@ namespace MCrypt.Cryptography
                     Output.Print("MCrypt file detected!");
 
                     // Récupération de la fin du Header pour avoir le nombre de caractères du Body
-                    string metadataHeaderString = Encoding.ASCII.GetString(metadataHeader);
+                    string metadataHeaderString = Encoding.Default.GetString(metadataHeader);
 
                     int metadataBodyLength = int.Parse(metadataHeaderString.Split('|')[1]);
                     Output.Print("Metadata Body Length: " + metadataBodyLength);
@@ -265,7 +265,7 @@ namespace MCrypt.Cryptography
                     source.Seek(-metadataBodyLength - _metadataHeaderLength, SeekOrigin.Current);
                     source.Read(metadataBody, 0, metadataBodyLength);
 
-                    string[] metadataBodyStringSplit = Encoding.ASCII.GetString(metadataBody).Split('|');
+                    string[] metadataBodyStringSplit = Encoding.Default.GetString(metadataBody).Split('|');
 
 
                     // RAPPEL du format de metadataBody : Version de MCrypt, Type[File/Directory], extension, Hash, Salt, Iterations, BatchesLength
@@ -312,7 +312,7 @@ namespace MCrypt.Cryptography
                     }
 
                     // Récupération du salt
-                    byte[] salt = Encoding.ASCII.GetBytes(metadataBodyStringSplit[4]);
+                    byte[] salt = Encoding.Default.GetBytes(metadataBodyStringSplit[4]);
 
                     // Récupération des itérations
                     int iterations = int.Parse(metadataBodyStringSplit[5]);

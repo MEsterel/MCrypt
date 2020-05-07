@@ -81,9 +81,9 @@ namespace MCrypt.Tools
             updater = new MUpdater(this);
         }
 
-        public void CheckForUpdatesAsync(bool notificateIfNoUpdates = true)
+        public void CheckForUpdatesAsync()
         {
-            updater.DoUpdateAsync(notificateIfNoUpdates);
+            updater.DoUpdateAsync();
         }
     }
 }
