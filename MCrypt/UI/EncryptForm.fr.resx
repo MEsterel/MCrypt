@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lblMcrypt.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 13</value>
@@ -127,29 +124,11 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Mot de passe :</value>
   </data>
-  <data name="label2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbPassword.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 13</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Confirmer le mot de passe :</value>
-  </data>
-  <data name="label3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbRePassword.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="btnEncrypt.Text" xml:space="preserve">
-    <value>&amp;Crypter</value>
-  </data>
-  <data name="btnEncrypt.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="lblEncrypt.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 30</value>
@@ -157,20 +136,29 @@
   <data name="lblEncrypt.Text" xml:space="preserve">
     <value>Crypter</value>
   </data>
-  <data name="lblEncrypt.ToolTip" xml:space="preserve">
-    <value />
+  <data name="aboutLink.ToolTip" xml:space="preserve">
+    <value>À propos de MCrypt</value>
   </data>
-  <data name="metroProgressSpinner1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="compressionLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 13</value>
   </data>
-  <data name="lblStatus.ToolTip" xml:space="preserve">
-    <value />
+  <data name="compressionLbl.Text" xml:space="preserve">
+    <value>Compression :</value>
   </data>
-  <data name="pbKey.ToolTip" xml:space="preserve">
-    <value />
+  <data name="compressionCmb.Items" xml:space="preserve">
+    <value>Minimale (plus rapide)</value>
   </data>
-  <data name="saveDirectoryUC.ToolTip" xml:space="preserve">
-    <value />
+  <data name="compressionCmb.Items1" xml:space="preserve">
+    <value>Rapide</value>
+  </data>
+  <data name="compressionCmb.Items2" xml:space="preserve">
+    <value>Optimale (plus lent)</value>
+  </data>
+  <data name="compressionCmb.Location" type="System.Drawing.Point, System.Drawing">
+    <value>123, 241</value>
+  </data>
+  <data name="compressionCmb.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 21</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -27580,8 +27568,5 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>MCrypt Crypter</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>

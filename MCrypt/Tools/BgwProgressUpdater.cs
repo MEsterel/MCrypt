@@ -32,14 +32,15 @@ namespace MCrypt.Tools
             }
             private set
             {
-                if (value >= 0 && value <= 100)
-                {
-                    this.percentage = value;
-                }
-                else
-                {
-                    throw new ArgumentOutOfRangeException("The provided percentage is out of range: it must be between 0 and 100.");
-                }
+                //if (value >= 0 && value <= 100)
+                //{
+                //    this.percentage = value;
+                //}
+                //else
+                //{
+                //    throw new ArgumentOutOfRangeException("The provided percentage is out of range: it must be between 0 and 100.");
+                //}
+                this.percentage = value;
             }
         }
 

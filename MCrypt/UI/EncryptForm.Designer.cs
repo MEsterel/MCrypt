@@ -32,18 +32,22 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EncryptForm));
             this.lblMcrypt = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.tbPassword = new System.Windows.Forms.TextBox();
+            this.passwordTxt = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.tbRePassword = new System.Windows.Forms.TextBox();
-            this.btnEncrypt = new System.Windows.Forms.Button();
+            this.rePasswordTxt = new System.Windows.Forms.TextBox();
+            this.encryptBtn = new System.Windows.Forms.Button();
             this.lblEncrypt = new System.Windows.Forms.Label();
             this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
             this.aboutLink = new System.Windows.Forms.LinkLabel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.lblStatus = new System.Windows.Forms.Label();
+            this.statusLbl = new System.Windows.Forms.Label();
             this.pbKey = new System.Windows.Forms.PictureBox();
+            this.compressionLbl = new System.Windows.Forms.Label();
+            this.compressionCmb = new System.Windows.Forms.ComboBox();
+            this.pbZip = new System.Windows.Forms.PictureBox();
             this.saveDirectoryUC = new MCrypt.UI.SaveDirectoryUC();
             ((System.ComponentModel.ISupportInitialize)(this.pbKey)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbZip)).BeginInit();
             this.SuspendLayout();
             // 
             // lblMcrypt
@@ -59,12 +63,12 @@
             this.label2.Name = "label2";
             this.toolTip1.SetToolTip(this.label2, resources.GetString("label2.ToolTip"));
             // 
-            // tbPassword
+            // passwordTxt
             // 
-            resources.ApplyResources(this.tbPassword, "tbPassword");
-            this.tbPassword.Name = "tbPassword";
-            this.toolTip1.SetToolTip(this.tbPassword, resources.GetString("tbPassword.ToolTip"));
-            this.tbPassword.UseSystemPasswordChar = true;
+            resources.ApplyResources(this.passwordTxt, "passwordTxt");
+            this.passwordTxt.Name = "passwordTxt";
+            this.toolTip1.SetToolTip(this.passwordTxt, resources.GetString("passwordTxt.ToolTip"));
+            this.passwordTxt.UseSystemPasswordChar = true;
             // 
             // label3
             // 
@@ -72,20 +76,20 @@
             this.label3.Name = "label3";
             this.toolTip1.SetToolTip(this.label3, resources.GetString("label3.ToolTip"));
             // 
-            // tbRePassword
+            // rePasswordTxt
             // 
-            resources.ApplyResources(this.tbRePassword, "tbRePassword");
-            this.tbRePassword.Name = "tbRePassword";
-            this.toolTip1.SetToolTip(this.tbRePassword, resources.GetString("tbRePassword.ToolTip"));
-            this.tbRePassword.UseSystemPasswordChar = true;
+            resources.ApplyResources(this.rePasswordTxt, "rePasswordTxt");
+            this.rePasswordTxt.Name = "rePasswordTxt";
+            this.toolTip1.SetToolTip(this.rePasswordTxt, resources.GetString("rePasswordTxt.ToolTip"));
+            this.rePasswordTxt.UseSystemPasswordChar = true;
             // 
-            // btnEncrypt
+            // encryptBtn
             // 
-            resources.ApplyResources(this.btnEncrypt, "btnEncrypt");
-            this.btnEncrypt.Name = "btnEncrypt";
-            this.toolTip1.SetToolTip(this.btnEncrypt, resources.GetString("btnEncrypt.ToolTip"));
-            this.btnEncrypt.UseVisualStyleBackColor = true;
-            this.btnEncrypt.Click += new System.EventHandler(this.btnEncrypt_Click);
+            resources.ApplyResources(this.encryptBtn, "encryptBtn");
+            this.encryptBtn.Name = "encryptBtn";
+            this.toolTip1.SetToolTip(this.encryptBtn, resources.GetString("encryptBtn.ToolTip"));
+            this.encryptBtn.UseVisualStyleBackColor = true;
+            this.encryptBtn.Click += new System.EventHandler(this.btnEncrypt_Click);
             // 
             // lblEncrypt
             // 
@@ -113,12 +117,12 @@
             this.toolTip1.SetToolTip(this.aboutLink, resources.GetString("aboutLink.ToolTip"));
             this.aboutLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.aboutLink_LinkClicked);
             // 
-            // lblStatus
+            // statusLbl
             // 
-            resources.ApplyResources(this.lblStatus, "lblStatus");
-            this.lblStatus.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblStatus.Name = "lblStatus";
-            this.toolTip1.SetToolTip(this.lblStatus, resources.GetString("lblStatus.ToolTip"));
+            resources.ApplyResources(this.statusLbl, "statusLbl");
+            this.statusLbl.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.statusLbl.Name = "statusLbl";
+            this.toolTip1.SetToolTip(this.statusLbl, resources.GetString("statusLbl.ToolTip"));
             // 
             // pbKey
             // 
@@ -127,6 +131,32 @@
             this.pbKey.Name = "pbKey";
             this.pbKey.TabStop = false;
             this.toolTip1.SetToolTip(this.pbKey, resources.GetString("pbKey.ToolTip"));
+            // 
+            // compressionLbl
+            // 
+            resources.ApplyResources(this.compressionLbl, "compressionLbl");
+            this.compressionLbl.Name = "compressionLbl";
+            this.toolTip1.SetToolTip(this.compressionLbl, resources.GetString("compressionLbl.ToolTip"));
+            // 
+            // compressionCmb
+            // 
+            resources.ApplyResources(this.compressionCmb, "compressionCmb");
+            this.compressionCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.compressionCmb.FormattingEnabled = true;
+            this.compressionCmb.Items.AddRange(new object[] {
+            resources.GetString("compressionCmb.Items"),
+            resources.GetString("compressionCmb.Items1"),
+            resources.GetString("compressionCmb.Items2")});
+            this.compressionCmb.Name = "compressionCmb";
+            this.toolTip1.SetToolTip(this.compressionCmb, resources.GetString("compressionCmb.ToolTip"));
+            // 
+            // pbZip
+            // 
+            resources.ApplyResources(this.pbZip, "pbZip");
+            this.pbZip.Image = global::MCrypt.Properties.Resources.zip20mod;
+            this.pbZip.Name = "pbZip";
+            this.pbZip.TabStop = false;
+            this.toolTip1.SetToolTip(this.pbZip, resources.GetString("pbZip.ToolTip"));
             // 
             // saveDirectoryUC
             // 
@@ -141,14 +171,17 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.pbZip);
+            this.Controls.Add(this.compressionCmb);
+            this.Controls.Add(this.compressionLbl);
             this.Controls.Add(this.saveDirectoryUC);
-            this.Controls.Add(this.lblStatus);
+            this.Controls.Add(this.statusLbl);
             this.Controls.Add(this.aboutLink);
             this.Controls.Add(this.metroProgressSpinner1);
             this.Controls.Add(this.lblEncrypt);
-            this.Controls.Add(this.btnEncrypt);
-            this.Controls.Add(this.tbRePassword);
-            this.Controls.Add(this.tbPassword);
+            this.Controls.Add(this.encryptBtn);
+            this.Controls.Add(this.rePasswordTxt);
+            this.Controls.Add(this.passwordTxt);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pbKey);
@@ -160,6 +193,7 @@
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EncryptUI_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pbKey)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbZip)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -169,15 +203,18 @@
         private System.Windows.Forms.Label lblMcrypt;
         private System.Windows.Forms.PictureBox pbKey;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tbPassword;
+        private System.Windows.Forms.TextBox passwordTxt;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tbRePassword;
-        private System.Windows.Forms.Button btnEncrypt;
+        private System.Windows.Forms.TextBox rePasswordTxt;
+        private System.Windows.Forms.Button encryptBtn;
         private System.Windows.Forms.Label lblEncrypt;
         private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner1;
         private System.Windows.Forms.LinkLabel aboutLink;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Label statusLbl;
         private SaveDirectoryUC saveDirectoryUC;
+        private System.Windows.Forms.Label compressionLbl;
+        private System.Windows.Forms.ComboBox compressionCmb;
+        private System.Windows.Forms.PictureBox pbZip;
     }
 }

@@ -9,19 +9,8 @@ namespace MCrypt.Cryptography
 {
     public enum CryptMode
     {
-        /// <summary>
-        /// Encrypt mode
-        /// </summary>
+        Auto = 0,
         Encrypt = 1,
-
-        /// <summary>
-        /// Decrypt mode
-        /// </summary>
-        Decrypt = 2,
-
-        /// <summary>
-        /// Not recommended. No mode set, to be defined.
-        /// </summary>
-        Auto = 0
+        Decrypt = 2
     }
 }

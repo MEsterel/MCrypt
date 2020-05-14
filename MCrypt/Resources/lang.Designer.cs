@@ -130,6 +130,15 @@ namespace MCrypt.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Checking password.
+        /// </summary>
+        internal static string CheckingPassword {
+            get {
+                return ResourceManager.GetString("CheckingPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Choose a file to open.
         /// </summary>
         internal static string ChooseFileToOpen {
@@ -157,6 +166,24 @@ namespace MCrypt.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Compressing data.
+        /// </summary>
+        internal static string CompressingData {
+            get {
+                return ResourceManager.GetString("CompressingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Decompressing data.
+        /// </summary>
+        internal static string DecompressingData {
+            get {
+                return ResourceManager.GetString("DecompressingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Decrypt.
         /// </summary>
         internal static string Decrypt {
@@ -175,11 +202,29 @@ namespace MCrypt.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Decryption successful!.
+        /// </summary>
+        internal static string DecryptionSuccessful {
+            get {
+                return ResourceManager.GetString("DecryptionSuccessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Details:.
         /// </summary>
         internal static string Details {
             get {
                 return ResourceManager.GetString("Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Encrypting.
+        /// </summary>
+        internal static string Encrypting {
+            get {
+                return ResourceManager.GetString("Encrypting", resourceCulture);
             }
         }
         
@@ -198,6 +243,15 @@ namespace MCrypt.Resources {
         internal static string EncryptingThe {
             get {
                 return ResourceManager.GetString("EncryptingThe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Encryption successful!.
+        /// </summary>
+        internal static string EncryptionSuccessful {
+            get {
+                return ResourceManager.GetString("EncryptionSuccessful", resourceCulture);
             }
         }
         
@@ -356,6 +410,33 @@ namespace MCrypt.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Preparing decryption.
+        /// </summary>
+        internal static string PreparingDecryption {
+            get {
+                return ResourceManager.GetString("PreparingDecryption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Preparing encryption.
+        /// </summary>
+        internal static string PreparingEncryption {
+            get {
+                return ResourceManager.GetString("PreparingEncryption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Reading metadata.
+        /// </summary>
+        internal static string ReadingMetadata {
+            get {
+                return ResourceManager.GetString("ReadingMetadata", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à The specified directory does not exist..
         /// </summary>
         internal static string SpecifiedDirectoryDoesntExist {
@@ -370,6 +451,15 @@ namespace MCrypt.Resources {
         internal static string SpecifiedObjectNotFound {
             get {
                 return ResourceManager.GetString("SpecifiedObjectNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à step.
+        /// </summary>
+        internal static string step {
+            get {
+                return ResourceManager.GetString("step", resourceCulture);
             }
         }
         
@@ -406,6 +496,15 @@ namespace MCrypt.Resources {
         internal static string Warning {
             get {
                 return ResourceManager.GetString("Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Writing metadata.
+        /// </summary>
+        internal static string WritingMetadata {
+            get {
+                return ResourceManager.GetString("WritingMetadata", resourceCulture);
             }
         }
         

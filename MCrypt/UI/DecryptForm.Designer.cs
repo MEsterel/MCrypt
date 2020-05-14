@@ -32,23 +32,23 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DecryptForm));
             this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
             this.lblDecrypt = new System.Windows.Forms.Label();
-            this.btnDecrypt = new System.Windows.Forms.Button();
-            this.tbPassword = new System.Windows.Forms.TextBox();
+            this.decryptBtn = new System.Windows.Forms.Button();
+            this.passwordTxt = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lblMcrypt = new System.Windows.Forms.Label();
             this.aboutLink = new System.Windows.Forms.LinkLabel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panelMode = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.rdobtnDecryptAndSave = new System.Windows.Forms.RadioButton();
-            this.rdobtnOpenTemp = new System.Windows.Forms.RadioButton();
+            this.decryptAndSaveRdoBtn = new System.Windows.Forms.RadioButton();
+            this.openTmpRdoBtn = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
-            this.pbKey = new System.Windows.Forms.PictureBox();
-            this.lblStatus = new System.Windows.Forms.Label();
+            this.keyPbx = new System.Windows.Forms.PictureBox();
+            this.statusLbl = new System.Windows.Forms.Label();
             this.saveDirectoryUC = new MCrypt.UI.SaveDirectoryUC();
             this.panelMode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbKey)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keyPbx)).BeginInit();
             this.SuspendLayout();
             // 
             // metroProgressSpinner1
@@ -67,20 +67,20 @@
             this.lblDecrypt.Name = "lblDecrypt";
             this.toolTip1.SetToolTip(this.lblDecrypt, resources.GetString("lblDecrypt.ToolTip"));
             // 
-            // btnDecrypt
+            // decryptBtn
             // 
-            resources.ApplyResources(this.btnDecrypt, "btnDecrypt");
-            this.btnDecrypt.Name = "btnDecrypt";
-            this.toolTip1.SetToolTip(this.btnDecrypt, resources.GetString("btnDecrypt.ToolTip"));
-            this.btnDecrypt.UseVisualStyleBackColor = true;
-            this.btnDecrypt.Click += new System.EventHandler(this.btnDecrypt_Click);
+            resources.ApplyResources(this.decryptBtn, "decryptBtn");
+            this.decryptBtn.Name = "decryptBtn";
+            this.toolTip1.SetToolTip(this.decryptBtn, resources.GetString("decryptBtn.ToolTip"));
+            this.decryptBtn.UseVisualStyleBackColor = true;
+            this.decryptBtn.Click += new System.EventHandler(this.btnDecrypt_Click);
             // 
-            // tbPassword
+            // passwordTxt
             // 
-            resources.ApplyResources(this.tbPassword, "tbPassword");
-            this.tbPassword.Name = "tbPassword";
-            this.toolTip1.SetToolTip(this.tbPassword, resources.GetString("tbPassword.ToolTip"));
-            this.tbPassword.UseSystemPasswordChar = true;
+            resources.ApplyResources(this.passwordTxt, "passwordTxt");
+            this.passwordTxt.Name = "passwordTxt";
+            this.toolTip1.SetToolTip(this.passwordTxt, resources.GetString("passwordTxt.ToolTip"));
+            this.passwordTxt.UseSystemPasswordChar = true;
             // 
             // label2
             // 
@@ -109,8 +109,8 @@
             // 
             resources.ApplyResources(this.panelMode, "panelMode");
             this.panelMode.Controls.Add(this.pictureBox2);
-            this.panelMode.Controls.Add(this.rdobtnDecryptAndSave);
-            this.panelMode.Controls.Add(this.rdobtnOpenTemp);
+            this.panelMode.Controls.Add(this.decryptAndSaveRdoBtn);
+            this.panelMode.Controls.Add(this.openTmpRdoBtn);
             this.panelMode.Controls.Add(this.label3);
             this.panelMode.Name = "panelMode";
             this.toolTip1.SetToolTip(this.panelMode, resources.GetString("panelMode.ToolTip"));
@@ -122,22 +122,22 @@
             this.pictureBox2.TabStop = false;
             this.toolTip1.SetToolTip(this.pictureBox2, resources.GetString("pictureBox2.ToolTip"));
             // 
-            // rdobtnDecryptAndSave
+            // decryptAndSaveRdoBtn
             // 
-            resources.ApplyResources(this.rdobtnDecryptAndSave, "rdobtnDecryptAndSave");
-            this.rdobtnDecryptAndSave.Name = "rdobtnDecryptAndSave";
-            this.rdobtnDecryptAndSave.TabStop = true;
-            this.toolTip1.SetToolTip(this.rdobtnDecryptAndSave, resources.GetString("rdobtnDecryptAndSave.ToolTip"));
-            this.rdobtnDecryptAndSave.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.decryptAndSaveRdoBtn, "decryptAndSaveRdoBtn");
+            this.decryptAndSaveRdoBtn.Name = "decryptAndSaveRdoBtn";
+            this.decryptAndSaveRdoBtn.TabStop = true;
+            this.toolTip1.SetToolTip(this.decryptAndSaveRdoBtn, resources.GetString("decryptAndSaveRdoBtn.ToolTip"));
+            this.decryptAndSaveRdoBtn.UseVisualStyleBackColor = true;
             // 
-            // rdobtnOpenTemp
+            // openTmpRdoBtn
             // 
-            resources.ApplyResources(this.rdobtnOpenTemp, "rdobtnOpenTemp");
-            this.rdobtnOpenTemp.Name = "rdobtnOpenTemp";
-            this.rdobtnOpenTemp.TabStop = true;
-            this.toolTip1.SetToolTip(this.rdobtnOpenTemp, resources.GetString("rdobtnOpenTemp.ToolTip"));
-            this.rdobtnOpenTemp.UseVisualStyleBackColor = true;
-            this.rdobtnOpenTemp.CheckedChanged += new System.EventHandler(this.rdobtnOpenTemp_CheckedChanged);
+            resources.ApplyResources(this.openTmpRdoBtn, "openTmpRdoBtn");
+            this.openTmpRdoBtn.Name = "openTmpRdoBtn";
+            this.openTmpRdoBtn.TabStop = true;
+            this.toolTip1.SetToolTip(this.openTmpRdoBtn, resources.GetString("openTmpRdoBtn.ToolTip"));
+            this.openTmpRdoBtn.UseVisualStyleBackColor = true;
+            this.openTmpRdoBtn.CheckedChanged += new System.EventHandler(this.rdobtnOpenTemp_CheckedChanged);
             // 
             // label3
             // 
@@ -145,20 +145,20 @@
             this.label3.Name = "label3";
             this.toolTip1.SetToolTip(this.label3, resources.GetString("label3.ToolTip"));
             // 
-            // pbKey
+            // keyPbx
             // 
-            resources.ApplyResources(this.pbKey, "pbKey");
-            this.pbKey.Image = global::MCrypt.Properties.Resources.key20;
-            this.pbKey.Name = "pbKey";
-            this.pbKey.TabStop = false;
-            this.toolTip1.SetToolTip(this.pbKey, resources.GetString("pbKey.ToolTip"));
+            resources.ApplyResources(this.keyPbx, "keyPbx");
+            this.keyPbx.Image = global::MCrypt.Properties.Resources.key20;
+            this.keyPbx.Name = "keyPbx";
+            this.keyPbx.TabStop = false;
+            this.toolTip1.SetToolTip(this.keyPbx, resources.GetString("keyPbx.ToolTip"));
             // 
-            // lblStatus
+            // statusLbl
             // 
-            resources.ApplyResources(this.lblStatus, "lblStatus");
-            this.lblStatus.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblStatus.Name = "lblStatus";
-            this.toolTip1.SetToolTip(this.lblStatus, resources.GetString("lblStatus.ToolTip"));
+            resources.ApplyResources(this.statusLbl, "statusLbl");
+            this.statusLbl.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.statusLbl.Name = "statusLbl";
+            this.toolTip1.SetToolTip(this.statusLbl, resources.GetString("statusLbl.ToolTip"));
             // 
             // saveDirectoryUC
             // 
@@ -173,16 +173,16 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.lblStatus);
+            this.Controls.Add(this.statusLbl);
             this.Controls.Add(this.saveDirectoryUC);
             this.Controls.Add(this.panelMode);
             this.Controls.Add(this.aboutLink);
             this.Controls.Add(this.metroProgressSpinner1);
             this.Controls.Add(this.lblDecrypt);
-            this.Controls.Add(this.btnDecrypt);
-            this.Controls.Add(this.tbPassword);
+            this.Controls.Add(this.decryptBtn);
+            this.Controls.Add(this.passwordTxt);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.pbKey);
+            this.Controls.Add(this.keyPbx);
             this.Controls.Add(this.lblMcrypt);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -192,7 +192,7 @@
             this.panelMode.ResumeLayout(false);
             this.panelMode.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbKey)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keyPbx)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -202,19 +202,19 @@
 
         private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner1;
         private System.Windows.Forms.Label lblDecrypt;
-        private System.Windows.Forms.Button btnDecrypt;
-        private System.Windows.Forms.TextBox tbPassword;
+        private System.Windows.Forms.Button decryptBtn;
+        private System.Windows.Forms.TextBox passwordTxt;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.PictureBox pbKey;
+        private System.Windows.Forms.PictureBox keyPbx;
         private System.Windows.Forms.Label lblMcrypt;
         private System.Windows.Forms.LinkLabel aboutLink;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Panel panelMode;
-        private System.Windows.Forms.RadioButton rdobtnOpenTemp;
-        private System.Windows.Forms.RadioButton rdobtnDecryptAndSave;
+        private System.Windows.Forms.RadioButton openTmpRdoBtn;
+        private System.Windows.Forms.RadioButton decryptAndSaveRdoBtn;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox2;
         private SaveDirectoryUC saveDirectoryUC;
-        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Label statusLbl;
     }
 }

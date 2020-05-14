@@ -144,6 +144,9 @@ Thanks to Metro UI for the spinning loader.
   <data name="Author" xml:space="preserve">
     <value>Author:</value>
   </data>
+  <data name="CheckingPassword" xml:space="preserve">
+    <value>Checking password</value>
+  </data>
   <data name="ChooseFileToOpen" xml:space="preserve">
     <value>Choose a file to open</value>
   </data>
@@ -153,20 +156,35 @@ Thanks to Metro UI for the spinning loader.
   <data name="ChooseSaveLocation" xml:space="preserve">
     <value>Choose save location</value>
   </data>
+  <data name="CompressingData" xml:space="preserve">
+    <value>Compressing data</value>
+  </data>
+  <data name="DecompressingData" xml:space="preserve">
+    <value>Decompressing data</value>
+  </data>
   <data name="Decrypt" xml:space="preserve">
     <value>Decrypt</value>
   </data>
   <data name="Decrypting" xml:space="preserve">
     <value>Decrypting</value>
   </data>
+  <data name="DecryptionSuccessful" xml:space="preserve">
+    <value>Decryption successful!</value>
+  </data>
   <data name="Details" xml:space="preserve">
     <value>Details:</value>
+  </data>
+  <data name="Encrypting" xml:space="preserve">
+    <value>Encrypting</value>
   </data>
   <data name="EncryptingBackThe" xml:space="preserve">
     <value>Encrypting back the</value>
   </data>
   <data name="EncryptingThe" xml:space="preserve">
     <value>Encrypting the</value>
+  </data>
+  <data name="EncryptionSuccessful" xml:space="preserve">
+    <value>Encryption successful!</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
@@ -220,11 +238,23 @@ Do you REALLY want to exit?</value>
   <data name="Preparing" xml:space="preserve">
     <value>Preparing</value>
   </data>
+  <data name="PreparingDecryption" xml:space="preserve">
+    <value>Preparing decryption</value>
+  </data>
+  <data name="PreparingEncryption" xml:space="preserve">
+    <value>Preparing encryption</value>
+  </data>
+  <data name="ReadingMetadata" xml:space="preserve">
+    <value>Reading metadata</value>
+  </data>
   <data name="SpecifiedDirectoryDoesntExist" xml:space="preserve">
     <value>The specified directory does not exist.</value>
   </data>
   <data name="SpecifiedObjectNotFound" xml:space="preserve">
     <value>The specified object does not exists.</value>
+  </data>
+  <data name="step" xml:space="preserve">
+    <value>step</value>
   </data>
   <data name="TheFileToDecryptIsNotMCryptFile" xml:space="preserve">
     <value>The file to decrypt is not a MCrypt encrypted file.</value>
@@ -237,6 +267,9 @@ Do you REALLY want to exit?</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>
+  </data>
+  <data name="WritingMetadata" xml:space="preserve">
+    <value>Writing metadata</value>
   </data>
   <data name="WrongPassword" xml:space="preserve">
     <value>Wrong password.

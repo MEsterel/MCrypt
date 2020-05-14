@@ -58,10 +58,12 @@ namespace MCrypt.UI
                 Output.Print("Locate encrypt window at the center of the screen.");
             }
 
-            AcceptButton = btnEncrypt;
+            AcceptButton = encryptBtn;
             inputPath = path;
             isInputPathDirectory = Files.IsPathDirectory(inputPath);
-            lblStatus.Text = "";
+            statusLbl.Text = "";
+
+            compressionCmb.SelectedIndex = 0; // Fastest mode is generally no compression
         }
 
         private void btnEncrypt_Click(object sender, EventArgs e)
@@ -71,19 +73,19 @@ namespace MCrypt.UI
 
             // Check passwords
             Output.Print("Checking passwords.");
-            if (tbPassword.Text == "")
+            if (passwordTxt.Text == "")
             {
                 MessageBox.Show(this, lang.PleaseEnterAPassword, this.Text + " - " + lang.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Output.Print("No password entered", Level.Warning);
                 return;
             }
-            else if (tbRePassword.Text == "")
+            else if (rePasswordTxt.Text == "")
             {
                 MessageBox.Show(this, lang.PleaseConfirmPassword, this.Text + " - " + lang.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Output.Print("No confirm password entered.", Level.Warning);
                 return;
             }
-            else if (tbPassword.Text != tbRePassword.Text)
+            else if (passwordTxt.Text != rePasswordTxt.Text)
             {
                 MessageBox.Show(this, lang.PasswordsDoNotMatch, this.Text + " - " + lang.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Output.Print("Passwords do not match.", Level.Warning);
@@ -98,7 +100,7 @@ namespace MCrypt.UI
             }
 
             // Set last values ////////////////////
-            password = tbPassword.Text;
+            password = passwordTxt.Text;
 
 
             // Output Directory
@@ -134,26 +136,44 @@ namespace MCrypt.UI
                     return;
             }
 
-            BackgroundWorker bw = new BackgroundWorker();
-            bw.RunWorkerCompleted += bw_RunWorkerCompleted;
-            bw.DoWork += bw_DoWork;
 
             UIWorking();
+            BackgroundWorker bw = new BackgroundWorker
+            {
+                WorkerReportsProgress = true
+            };
+            bw.RunWorkerCompleted += bw_RunWorkerCompleted;
+            bw.DoWork += bw_DoWork;
+            bw.ProgressChanged += Bw_ProgressChanged;
 
-            lblStatus.Text = lang.EncryptingThe + " " + (isInputPathDirectory ? lang.folder : lang.file);
+            bw.RunWorkerAsync(new CryptArgs(inputPath, Path.GetDirectoryName(simulatedOutputFilePath), password, isInputPathDirectory, (CompressionMode)compressionCmb.SelectedIndex));
+        }
 
-            bw.RunWorkerAsync(new CryptArgs(inputPath, Path.GetDirectoryName(simulatedOutputFilePath), password, isInputPathDirectory));
+        private void Bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            statusLbl.Text = (string)e.UserState;
+            if (e.ProgressPercentage == -1)
+            {
+                metroProgressSpinner1.Speed = 1;
+            }
+            else
+            {
+                metroProgressSpinner1.Speed = 4;
+            }
         }
 
         void bw_DoWork(object sender, DoWorkEventArgs e)
         {
             CryptArgs args = (CryptArgs)e.Argument;
-            FileCrypter.EncryptFile(args.InputPath, args.OutputPath, args.Password, args.IsDirectory);
+
+            BgwProgressUpdater bgw = new BgwProgressUpdater((BackgroundWorker)sender);
+
+            FileCrypter.EncryptFile(args.InputPath, args.OutputPath, args.Password, args.IsDirectory, args.CompressionMode, bgw);
         }
 
         void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            lblStatus.Text = "";
+            statusLbl.Text = "";
 
             if (e.Error != null) // If there is an error
             {
@@ -191,11 +211,11 @@ namespace MCrypt.UI
         {
             cancelClose = false;
 
-            aboutLink.Enabled = true;
-            tbPassword.Enabled = true;
-            tbRePassword.Enabled = true;
-            btnEncrypt.Enabled = true;
+            passwordTxt.Enabled = true;
+            rePasswordTxt.Enabled = true;
+            encryptBtn.Enabled = true;
             saveDirectoryUC.UserInputEnabled = true;
+            compressionCmb.Enabled = true;
 
             metroProgressSpinner1.Visible = false;
             metroProgressSpinner1.Spinning = false;
@@ -205,11 +225,11 @@ namespace MCrypt.UI
         {
             cancelClose = true;
 
-            aboutLink.Enabled = false;
-            tbPassword.Enabled = false;
-            tbRePassword.Enabled = false;
+            passwordTxt.Enabled = false;
+            rePasswordTxt.Enabled = false;
             saveDirectoryUC.UserInputEnabled = false;
-            btnEncrypt.Enabled = false;
+            encryptBtn.Enabled = false;
+            compressionCmb.Enabled = false;
 
             metroProgressSpinner1.Visible = true;
             metroProgressSpinner1.Spinning = true;

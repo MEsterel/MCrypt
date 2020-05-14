@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using MCrypt.Exceptions;
+using MCrypt.Resources;
 using MCrypt.Tools;
 
 namespace MCrypt.Cryptography
@@ -20,7 +22,11 @@ namespace MCrypt.Cryptography
         public const int _metadataHeaderLength = 30; // "MCryptEncryptedData_" + (10)
         public static readonly int _readBufferSize = 268435456; // Buffer size of 0.25 GB
 
-        public static CrypterInfo EncryptFile(string inputPath, string outputDirectory, string password, bool isDirectory)
+
+        ////// METADATA ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        ////// Format du Body : Version de MCrypt, Type[File/Directory], OriginalName, Hash, Salt, Iterations, BatchesLength, CompressionMode
+
+        public static CrypterInfo EncryptFile(string inputPath, string outputDirectory, string password, bool isDirectory, CompressionMode compressionMode, BgwProgressUpdater bgw)
         {
             Output.Print("ENCRYPTING: " + inputPath);
 
@@ -36,19 +42,22 @@ namespace MCrypt.Cryptography
                 Output.Print("Output file path: " + outputFilePath);
 
                 // MANAGE DIRECTORIES
+                bgw.ProgressChanged(0, lang.CompressingData);
+                finalInputPath = Files.GetTempFilePath();
                 if (!isDirectory)
                 {
                     Output.Print("Encrypting a file.");
-                    finalInputPath = inputPath;
+                    Output.Print(string.Format("Zipping file in temp file. ({0})", finalInputPath));
+                    Zipper.ZipOneFile(inputPath, finalInputPath, compressionMode);
                 }
                 else
                 {
                     Output.Print("Encrypting a directory.");
-                    finalInputPath = Files.GetTempFilePath();
                     Output.Print(string.Format("Zipping directory in temp file. ({0})", finalInputPath));
-                    DirectoryZipper.Zip(inputPath, finalInputPath);
+                    Zipper.ZipDirectory(inputPath, finalInputPath, compressionMode);
                 }
 
+                bgw.ProgressChanged(20, lang.PreparingEncryption);
 
                 // Set Aes
                 AesManaged aes = new AesManaged();
@@ -117,6 +126,8 @@ namespace MCrypt.Cryptography
                         Output.Print("Encrypting batches...");
                         while (readBytes < totalReadBytes)
                         {
+                            bgw.ProgressChanged(20 + batches * 60 / batchesNumber, string.Format(lang.Encrypting + " (" + lang.step + " {0} / {1})", batches + 1, batchesNumber));
+
                             using (MemoryStream ms = new MemoryStream())
                             {
                                 using (CryptoStream cryptoStream = new CryptoStream(ms, transform, CryptoStreamMode.Write)) // we create a cryptoStream for each batch (because it's of single use)
@@ -156,9 +167,8 @@ namespace MCrypt.Cryptography
                         Output.Print(string.Format("Total encrypted bytes: {0}", encryptedBytes));
 
 
-                        ////// METADATA
-                        ////// Format du Body : Version de MCrypt, Type[File/Directory], originalName, Hash, Salt, Iterations, BatchesLength
-                        
+
+                        bgw.ProgressChanged(80, lang.WritingMetadata);
                         Output.Print("Building metadata.");
 
                         // Building metadataBatchesLength
@@ -169,7 +179,8 @@ namespace MCrypt.Cryptography
                         }
                         Output.Print("Metadata batches length: " + metadataBatchesLengthString);
 
-                        string metadataString = string.Format("{0}|{1}|{2}|{3}|{4}|{5}|{6}", Application.ProductVersion, isDirectory.ToString(), originalName, passwordHash, saltString, _iterations, metadataBatchesLengthString);
+                        string metadataString = string.Format("{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|",
+                            Application.ProductVersion, isDirectory.ToString(), originalName, passwordHash, saltString, _iterations, metadataBatchesLengthString, (int)compressionMode);
 
                         byte[] metadata = Encoding.Default.GetBytes(metadataString);
 
@@ -187,6 +198,7 @@ namespace MCrypt.Cryptography
 
                 }
 
+                bgw.ProgressChanged(100, lang.EncryptionSuccessful);
                 Output.Print("Encryption successful!");
 
             }
@@ -199,20 +211,237 @@ namespace MCrypt.Cryptography
                 stopwatch.Stop();
                 Output.Print(string.Format("Operation ended in {0} .", stopwatch.Elapsed));
 
-                if (isDirectory && File.Exists(finalInputPath))
+                if (File.Exists(finalInputPath))
                 {
                     Files.OptimalFileDelete(finalInputPath);
-                    Output.Print("Zipped directory temp file deleted.");
+                    Output.Print("Zipped temp file deleted.");
                 }
             }
 
-            return new CrypterInfo(outputFilePath, isDirectory);
+            return new CrypterInfo(outputFilePath, isDirectory, compressionMode);
         }
 
 
-        public static CrypterInfo DecryptFile(string inputFilePath, string outputDirectory, string password)
+        public static CrypterInfo DecryptFile(string inputFilePath, string outputDirectory, string password, BgwProgressUpdater bgw)
         {
             Output.Print("DECRYPTING: " + inputFilePath);
+
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+
+            // Needed for return
+            bool isDirectory = false;
+            string userOutputPath = "";
+            CompressionMode compressionMode;
+
+            try
+            {
+                
+                // DECRYPT PROCESS
+                using (FileStream source = new FileStream(inputFilePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    bgw.ProgressChanged(5, lang.ReadingMetadata);
+
+
+                    // Récupération du Header
+                    byte[] metadataHeader = new byte[_metadataHeaderLength]; // Simplement "MCryptEncryptedData_{taille d'octets à lire}"
+                    source.Seek(-_metadataHeaderLength, SeekOrigin.End);
+                    source.Read(metadataHeader, 0, _metadataHeaderLength);
+
+                    // Vérification si ce fichier est bien un fichier MCrypt
+                    try
+                    {
+                        string metadataHeaderStringCheck = Encoding.Default.GetString(metadataHeader);
+                        //Console.WriteLine(metadataHeaderString);
+
+                        if (metadataHeaderStringCheck.Split('|')[0] != "MCryptEncryptedData")
+                        {
+                            Output.Print("Metadata header incorrect. This is not a MCrypt file.", Level.Error);
+                            throw new Exception();
+                        }
+                    }
+                    catch // Si une erreur survient, c'est que ce n'est pas 
+                    {
+                        source.Flush();
+                        source.Close();
+                        throw new NotMCryptFileException();
+                    }
+                    Output.Print("MCrypt file detected!");
+
+                    // Récupération de la fin du Header pour avoir le nombre de caractères du Body
+                    string metadataHeaderString = Encoding.Default.GetString(metadataHeader);
+
+                    int metadataBodyLength = int.Parse(metadataHeaderString.Split('|')[1]);
+                    Output.Print("Metadata Body Length: " + metadataBodyLength);
+
+                    byte[] metadataBody = new byte[metadataBodyLength];
+                    source.Seek(-metadataBodyLength - _metadataHeaderLength, SeekOrigin.Current);
+                    source.Read(metadataBody, 0, metadataBodyLength);
+
+                    string[] metadataBodyStringSplit = Encoding.Default.GetString(metadataBody).Split('|');
+
+
+                    //Vérification de la version 
+                    Version mcryptVersion = new Version(metadataBodyStringSplit[0]);
+                    if (mcryptVersion <= Version.Parse("1.2.0.0"))
+                    {
+                        Output.Print(string.Format("File encrypted with a previous version of MCrypt ({0}). Decrypting with Osbolete_DecryptFile120.", mcryptVersion));
+
+                        source.Flush();
+                        source.Close();
+
+                        return Obsolete_DecryptFile120(inputFilePath, outputDirectory, password);
+                    }
+                    Output.Print("Current MCrypt version!");
+
+
+                    // Vérification du mot de passe
+                    bgw.ProgressChanged(10, lang.CheckingPassword);
+                    string passwordHash = metadataBodyStringSplit[3];
+                    if (!BCrypt.Net.BCrypt.EnhancedVerify(password, passwordHash))
+                    {
+                        throw new WrongPasswordException();
+                    }
+                    Output.Print("Correct password!");
+
+
+                    // Build output path
+                    bgw.ProgressChanged(15, lang.PreparingDecryption);
+
+                    // Manage encrypted directories
+                    isDirectory = bool.Parse(metadataBodyStringSplit[1]);
+                    userOutputPath = Path.Combine(outputDirectory, metadataBodyStringSplit[2]); // The path for user output.
+                    Output.Print(string.Format("Built User Output Path: ({0})", userOutputPath));
+                    string outputFilePath = Files.GetTempFilePath();
+
+                    if (!isDirectory)
+                    {
+                        Output.Print("Decrypting a file.");
+                    }
+                    else
+                    {
+                        Output.Print("Decrypting a directory.");
+                    }
+                    Output.Print(string.Format("Decrypting compressed data in temp file. ({0})", outputFilePath));
+
+                    // Récupération du salt
+                    byte[] salt = Encoding.Default.GetBytes(metadataBodyStringSplit[4]);
+
+                    // Récupération des itérations
+                    int iterations = int.Parse(metadataBodyStringSplit[5]);
+
+                    // Récupération des Batches Length
+                    Output.Print("Batches Length: " + metadataBodyStringSplit[6]);
+                    string[] metadataReadBufferSizeStringSplit = metadataBodyStringSplit[6].Split('/');
+                    long[] readBatchesLength = new long[metadataReadBufferSizeStringSplit.Length - 1];
+                    for (int i = 0; i < metadataReadBufferSizeStringSplit.Length - 1; i++) // (- 1 car le dernier est vide)
+                    {
+                        readBatchesLength[i] = long.Parse(metadataReadBufferSizeStringSplit[i]);
+                    }
+
+                    // Récupéartion du compressionMode
+                    compressionMode = (CompressionMode)int.Parse(metadataBodyStringSplit[7]);
+
+
+                    // Set Aes
+                    AesManaged aes = new AesManaged();
+                    aes.BlockSize = aes.LegalBlockSizes[0].MaxSize;
+                    aes.KeySize = aes.LegalKeySizes[0].MaxSize;
+
+                    // Set key, iv & mode
+                    // NB: Rfc2898DeriveBytes initialization and subsequent calls to   GetBytes   must be eactly the same, including order, on both the encryption and decryption sides.
+                    Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(password, salt, iterations);
+                    aes.Key = key.GetBytes(aes.KeySize / 8);
+                    aes.IV = key.GetBytes(aes.BlockSize / 8);
+                    aes.Mode = CipherMode.CBC;
+                    aes.Padding = PaddingMode.PKCS7;
+
+                    // Create decryptor
+                    ICryptoTransform transform = aes.CreateDecryptor(aes.Key, aes.IV);
+
+
+                    // Décryptage
+                    using (FileStream destination = new FileStream(outputFilePath, FileMode.Create, FileAccess.Write, FileShare.Read))
+                    {
+
+                        // Remise à zéro du flux !!!
+                        source.Seek(0, SeekOrigin.Begin);
+
+                        long readBytes = 0;
+                        long totalReadBytes = source.Length - (_metadataHeaderLength + metadataBodyLength);
+                        double batchesNumber = readBatchesLength.Length;
+                        Output.Print("Total bytes to decrypt: " + totalReadBytes);
+                        Output.Print("Number of batches: " + batchesNumber);
+
+                        int batches = 0;
+                        long decryptedBytes = 0;
+
+                        Output.Print("Decrypting batches...");
+
+                        for (int i = 0; i < batchesNumber; i++)
+                        {
+                            bgw.ProgressChanged(20 + (int)(i * 60 / batchesNumber), string.Format(lang.Decrypting + " (" + lang.step + " {0} / {1})", i, batchesNumber));
+                            using (MemoryStream ms = new MemoryStream())
+                            {
+                                using (CryptoStream cryptoStream = new CryptoStream(ms, transform, CryptoStreamMode.Write)) // we create a cryptoStream for each batch (because it's of single use)
+                                {
+                                    int bytesToRead = (int)readBatchesLength[i];
+
+                                    byte[] readBuffer = new byte[bytesToRead];
+                                    source.Read(readBuffer, 0, bytesToRead);
+                                    cryptoStream.Write(readBuffer, 0, bytesToRead);
+
+                                    cryptoStream.FlushFinalBlock();
+                                    readBytes += bytesToRead;
+                                    
+                                    decryptedBytes += ms.Length;
+
+                                    destination.Write(ms.ToArray(), 0, (int)ms.Length);
+                                    ms.Flush();
+                                }
+                            }
+
+                            batches++;
+                            Output.Print(string.Format("Batch number {0} / {1} done. ({2} bytes)", batches, batchesNumber, readBatchesLength[i]));
+
+                            GC.Collect(); // Nécessaire !!!!!
+                        }
+
+                        Output.Print(string.Format("Total decrypted bytes: {0}", decryptedBytes));
+                    }
+
+                    bgw.ProgressChanged(80, lang.DecompressingData);
+                    Zipper.Unzip(outputFilePath, isDirectory? userOutputPath : Path.GetDirectoryName(userOutputPath)); // If this is a single file, don't create a folder with its name, just decrypt it directly.
+                    Files.OptimalFileDelete(outputFilePath);
+                    Output.Print("Unzipped and deleted temp file containing compressed data.");
+
+                }
+
+                bgw.ProgressChanged(100, lang.DecryptionSuccessful);
+                Output.Print("Decryption successful!");
+            }
+            catch (WrongPasswordException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw new DecryptException(e.Message, e.InnerException);
+            }
+            finally
+            {
+                stopwatch.Stop();
+                Output.Print(string.Format("Operation ended in {0} .", stopwatch.Elapsed));
+            }
+
+            return new CrypterInfo(userOutputPath, isDirectory, compressionMode);
+        }
+
+
+        public static CrypterInfo Obsolete_DecryptFile120(string inputFilePath, string outputDirectory, string password)
+        {
+            Output.Print("DECRYPTING OBSOLETE 120: " + inputFilePath);
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -223,7 +452,7 @@ namespace MCrypt.Cryptography
 
             try
             {
-                
+
                 // DECRYPT PROCESS
                 using (FileStream source = new FileStream(inputFilePath, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
@@ -266,21 +495,7 @@ namespace MCrypt.Cryptography
                     string[] metadataBodyStringSplit = Encoding.Default.GetString(metadataBody).Split('|');
 
 
-                    // RAPPEL du format de metadataBody : Version de MCrypt, Type[File/Directory], extension, Hash, Salt, Iterations, BatchesLength
-
-
-                    // Vérification de la version - DESACTIVE POUR LE MOMENT
-                    //string mcryptVersion = metadataBodyStringSplit[0];
-                    //if (mcryptVersion != Application.ProductVersion)
-                    //{
-                    //    Output.Print(string.Format("File encrypted with a previous version of MCrypt ({0}). Decrypting with the according process.", mcryptVersion));
-
-                    //    source.Flush();
-                    //    source.Close();
-
-                    //    // Pas encore de version antérieure...
-                    //}
-                    //Output.Print("Current MCrypt version!");
+                    // RAPPEL du format de metadataBody de la 120: Version de MCrypt, Type[File/Directory], extension, Hash, Salt, Iterations, BatchesLength
 
 
                     // Vérification du mot de passe
@@ -343,7 +558,7 @@ namespace MCrypt.Cryptography
 
 
                     // Décryptage
-                    
+
                     using (FileStream destination = new FileStream(outputFilePath, FileMode.Create, FileAccess.Write, FileShare.Read))
                     {
 
@@ -375,7 +590,7 @@ namespace MCrypt.Cryptography
 
                                     cryptoStream.FlushFinalBlock();
                                     readBytes += bytesToRead;
-                                    
+
                                     decryptedBytes += ms.Length;
 
                                     destination.Write(ms.ToArray(), 0, (int)ms.Length);
@@ -395,7 +610,7 @@ namespace MCrypt.Cryptography
 
                     if (isDirectory)
                     {
-                        DirectoryZipper.Unzip(outputFilePath, userOutputPath);
+                        Zipper.Unzip(outputFilePath, userOutputPath);
                         Files.OptimalFileDelete(outputFilePath);
                         Output.Print("Unzipped and deleted temp file containing directory.");
                     }
@@ -419,15 +634,10 @@ namespace MCrypt.Cryptography
                 Output.Print(string.Format("Operation ended in {0} .", stopwatch.Elapsed));
             }
 
-            return new CrypterInfo(userOutputPath, isDirectory);
+            return new CrypterInfo(userOutputPath, isDirectory, CompressionMode.None); // Il n'y avait pas de compression à cette époque
         }
 
-        /// <summary>
-        /// Decryptage osbsolète (MCrypt version 0.3.0)
-        /// </summary>
-        /// <param name="inputFilePath"></param>
-        /// <param name="outputFilePath"></param>
-        /// <param name="password"></param>
+
         public static void Obsolete_DecryptFile030(string inputFilePath, string outputFilePath, string password)
         {
 

@@ -144,6 +144,9 @@ Merci à Metro UI pour le symbole de chargement tournant.
   <data name="Author" xml:space="preserve">
     <value>Auteur :</value>
   </data>
+  <data name="CheckingPassword" xml:space="preserve">
+    <value>Vérification du mot de passe</value>
+  </data>
   <data name="ChooseFileToOpen" xml:space="preserve">
     <value>Choisissez un fichier à ouvrir</value>
   </data>
@@ -153,20 +156,35 @@ Merci à Metro UI pour le symbole de chargement tournant.
   <data name="ChooseSaveLocation" xml:space="preserve">
     <value>Choisissez un emplacement de sauvegarde</value>
   </data>
+  <data name="CompressingData" xml:space="preserve">
+    <value>Compression des données</value>
+  </data>
+  <data name="DecompressingData" xml:space="preserve">
+    <value>Décompression des données</value>
+  </data>
   <data name="Decrypt" xml:space="preserve">
     <value>Décrypter</value>
   </data>
   <data name="Decrypting" xml:space="preserve">
     <value>Décryptage</value>
   </data>
+  <data name="DecryptionSuccessful" xml:space="preserve">
+    <value>Décryptage réussi !</value>
+  </data>
   <data name="Details" xml:space="preserve">
     <value>Détails :</value>
+  </data>
+  <data name="Encrypting" xml:space="preserve">
+    <value>Cryptage</value>
   </data>
   <data name="EncryptingBackThe" xml:space="preserve">
     <value>Rechiffrement du</value>
   </data>
   <data name="EncryptingThe" xml:space="preserve">
     <value>Cryptage du</value>
+  </data>
+  <data name="EncryptionSuccessful" xml:space="preserve">
+    <value>Cryptage réussi !</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Erreur</value>
@@ -220,11 +238,20 @@ Voulez-vous VRAIMENT quitter ?</value>
   <data name="Preparing" xml:space="preserve">
     <value>Préparation</value>
   </data>
+  <data name="PreparingEncryption" xml:space="preserve">
+    <value>Préparation du cryptage</value>
+  </data>
+  <data name="ReadingMetadata" xml:space="preserve">
+    <value>Lecture des métadonnées</value>
+  </data>
   <data name="SpecifiedDirectoryDoesntExist" xml:space="preserve">
     <value>Le répertoire précisé n'existe pas.</value>
   </data>
   <data name="SpecifiedObjectNotFound" xml:space="preserve">
     <value>L'objet précisé n'existe pas.</value>
+  </data>
+  <data name="step" xml:space="preserve">
+    <value>étape</value>
   </data>
   <data name="TheFileToDecryptIsNotMCryptFile" xml:space="preserve">
     <value>Le fichier à décrypter n'est pas un fichier crypté MCrypt.</value>
@@ -237,6 +264,9 @@ Voulez-vous VRAIMENT quitter ?</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Attention</value>
+  </data>
+  <data name="WritingMetadata" xml:space="preserve">
+    <value>Écriture des métadonnées</value>
   </data>
   <data name="WrongPassword" xml:space="preserve">
     <value>Mot de passe incorrect.

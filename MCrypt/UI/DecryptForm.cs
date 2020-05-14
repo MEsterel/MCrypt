@@ -61,18 +61,18 @@ namespace MCrypt.UI
             else
                 Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2, (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
 
-            AcceptButton = btnDecrypt;
+            AcceptButton = decryptBtn;
             inputFilePath = path;
             saveDirectoryUC.InitialDirectory = Path.GetDirectoryName(inputFilePath);
-            rdobtnOpenTemp.Checked = true;
-            lblStatus.Text = "";
+            openTmpRdoBtn.Checked = true;
+            statusLbl.Text = "";
         }
 
         private void btnDecrypt_Click(object sender, EventArgs e)
         {
 
             // Check password
-            if (tbPassword.Text == "")
+            if (passwordTxt.Text == "")
             {
                 MessageBox.Show(this, lang.PleaseEnterYourPassword, this.Text + " - " + lang.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -86,10 +86,10 @@ namespace MCrypt.UI
             }
 
             // Set last values
-            password = tbPassword.Text;
+            password = passwordTxt.Text;
 
             //Run through parameters
-            if (rdobtnDecryptAndSave.Checked)
+            if (decryptAndSaveRdoBtn.Checked)
             {
                 //// DECRYPT AND SAVE /////////////////////////////////////////////////
                 if (saveDirectoryUC.SaveIsSource)
@@ -111,14 +111,17 @@ namespace MCrypt.UI
                     // Existing files are not managed here.
                 }
 
-                // Set backgorund worker
-                BackgroundWorker bwSave = new BackgroundWorker();
-                bwSave.RunWorkerCompleted += bwSave_RunWorkerCompleted;
-                bwSave.DoWork += bwSave_DoWork;
 
                 // Decrypt !
                 UIWorking();
-                lblStatus.Text = lang.Decrypting;
+                //statusLbl.Text = lang.Decrypting;
+                BackgroundWorker bwSave = new BackgroundWorker
+                {
+                    WorkerReportsProgress = true
+                };
+                bwSave.DoWork += bwSave_DoWork;
+                bwSave.RunWorkerCompleted += bwSave_RunWorkerCompleted;
+                bwSave.ProgressChanged += bw_ProgressChanged;
                 bwSave.RunWorkerAsync(new CryptArgs(inputFilePath, outputDirectory, password));
             }
             else
@@ -133,7 +136,7 @@ namespace MCrypt.UI
                 };
                 bwOpenTemp.DoWork += bwOpenTemp_DoWork;
                 bwOpenTemp.RunWorkerCompleted += bwOpenTemp_RunWorkerCompleted;
-                bwOpenTemp.ProgressChanged += bwOpenTemp_ProgressChanged;
+                bwOpenTemp.ProgressChanged += bw_ProgressChanged;
                 bwOpenTemp.RunWorkerAsync(new TempCryptArgs(inputFilePath, password));
             }
 
@@ -145,7 +148,10 @@ namespace MCrypt.UI
         void bwOpenTemp_DoWork(object sender, DoWorkEventArgs e)
         {
             TempCryptArgs args = (TempCryptArgs)e.Argument;
-            TempDecryptFile tDecryptFile = new TempDecryptFile(args.InputFilePath, args.Password, (BackgroundWorker)sender, this);
+
+            BgwProgressUpdater bgw = new BgwProgressUpdater((BackgroundWorker)sender);
+
+            TempDecryptFile tDecryptFile = new TempDecryptFile(args.InputFilePath, args.Password, bgw, this);
             tDecryptFile.Run();
         }
 
@@ -155,7 +161,7 @@ namespace MCrypt.UI
         void bwOpenTemp_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             UIReady();
-            lblStatus.Text = "";
+            statusLbl.Text = "";
             TopMost = true;
             SetTopLevel(true);
 
@@ -168,8 +174,8 @@ namespace MCrypt.UI
                 else
                     MessageBox.Show(this, lang.AnErrorOccuredDuringDecryption + "\n" + lang.Details + " " + e.Error.Message, this.Text + " - " + lang.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                tbPassword.Clear();
-                tbPassword.Select();
+                passwordTxt.Clear();
+                passwordTxt.Select();
                 return;
             }
             else
@@ -179,10 +185,10 @@ namespace MCrypt.UI
             }
         }
 
-        void bwOpenTemp_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            lblStatus.Text = (string)e.UserState;
-            if (e.ProgressPercentage == 50)
+            statusLbl.Text = (string)e.UserState;
+            if (e.ProgressPercentage == -1)
             {
                 metroProgressSpinner1.Speed = 1;
             }
@@ -198,7 +204,10 @@ namespace MCrypt.UI
         void bwSave_DoWork(object sender, DoWorkEventArgs e)
         {
             CryptArgs args = (CryptArgs)e.Argument;
-            FileCrypter.DecryptFile(args.InputPath, args.OutputPath, args.Password);
+
+            BgwProgressUpdater bgw = new BgwProgressUpdater((BackgroundWorker)sender);
+
+            FileCrypter.DecryptFile(args.InputPath, args.OutputPath, args.Password, bgw);
         }
 
         /// <summary>
@@ -206,7 +215,7 @@ namespace MCrypt.UI
         /// </summary>
         void bwSave_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            lblStatus.Text = "";
+            statusLbl.Text = "";
 
             if (e.Error != null) // If there is an error
             {
@@ -221,8 +230,8 @@ namespace MCrypt.UI
                 try { File.Delete(outputDirectory);  }
                 catch { }
 
-                tbPassword.Clear();
-                tbPassword.Select();
+                passwordTxt.Clear();
+                passwordTxt.Select();
                 return;
             }
             else
@@ -244,12 +253,11 @@ namespace MCrypt.UI
         {
             cancelClose = false;
 
-            aboutLink.Enabled = true;
-            tbPassword.Enabled = true;
-            btnDecrypt.Enabled = true;
+            passwordTxt.Enabled = true;
+            decryptBtn.Enabled = true;
             saveDirectoryUC.UserInputEnabled = true;
-            rdobtnDecryptAndSave.Enabled = true;
-            rdobtnOpenTemp.Enabled = true;
+            decryptAndSaveRdoBtn.Enabled = true;
+            openTmpRdoBtn.Enabled = true;
             rdobtnOpenTemp_CheckedChanged(null, null); //simulating to refresh
 
             metroProgressSpinner1.Visible = false;
@@ -260,13 +268,12 @@ namespace MCrypt.UI
         {
             cancelClose = true;
 
-            aboutLink.Enabled = false;
-            tbPassword.Enabled = false;
-            btnDecrypt.Enabled = false;
+            passwordTxt.Enabled = false;
+            decryptBtn.Enabled = false;
             saveDirectoryUC.UserInputEnabled = false;
-            btnDecrypt.Enabled = false;
-            rdobtnOpenTemp.Enabled = false;
-            rdobtnDecryptAndSave.Enabled = false;
+            decryptBtn.Enabled = false;
+            openTmpRdoBtn.Enabled = false;
+            decryptAndSaveRdoBtn.Enabled = false;
 
             metroProgressSpinner1.Visible = true;
             metroProgressSpinner1.Spinning = true;
@@ -281,7 +288,7 @@ namespace MCrypt.UI
 
         private void rdobtnOpenTemp_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdobtnOpenTemp.Checked)
+            if (openTmpRdoBtn.Checked)
             {
                 saveDirectoryUC.Visible = false;
                 this.Size = new Size(295, 249);

@@ -27,23 +27,23 @@ namespace MCrypt.Cryptography
         /// <summary>
         /// Path of the file to manage.
         /// </summary>
-        private string inputFilePath;
+        private string InputFilePath;
 
-        private string password;
+        private string Password;
 
         /// <summary>
         /// Path of the tempoary file.
         /// </summary>
-        private string tempPath;
+        private string TempPath;
 
         /// <summary>
         /// Indicate a background worker if you want to know the progress of the manager's work.
         /// </summary>
-        private BgwProgressUpdater bgw;
+        private BgwProgressUpdater Bgw;
 
-        private CrypterInfo decryptedInfo;
+        private CrypterInfo DecryptedInfo;
 
-        private Form owner;
+        private Form Owner;
 
         /// <summary>
         /// Initialize a temporarily decrypted file manager.
@@ -51,21 +51,18 @@ namespace MCrypt.Cryptography
         /// <param name="path">Path of the file to decrypt and manage.</param>
         /// <param name="password">Password of the file.</param>
         /// <param name="bgWorker">Optional. Indicate a background worker if you want to know the progress of the manager's work.</param>
-        public TempDecryptFile(string inputFilePath, string password, BackgroundWorker bgWorker = null, Form owner = null)
+        public TempDecryptFile(string inputFilePath, string password, BgwProgressUpdater bgw, Form owner)
         {
-            this.inputFilePath = inputFilePath;
-            this.password = password;
-            this.owner = owner;
+            InputFilePath = inputFilePath;
+            Password = password;
+            Owner = owner;
 
             if (!File.Exists(inputFilePath))
             {
                 throw new FileNotFoundException();
             }
 
-            if (bgWorker != null)
-            {
-                bgw = new BgwProgressUpdater(bgWorker);
-            }
+            Bgw = bgw;
         }
 
         public void Run()
@@ -73,20 +70,19 @@ namespace MCrypt.Cryptography
             try
             {
                 //// 1. PREPARE TEMP DIRECTORY
-                bgw.ProgressChanged(0, lang.Preparing);
+                Bgw.ProgressChanged(0, lang.Preparing);
 
                 // Get temp working directory
-                tempPath = Files.GetTempDirectoryPath();
+                TempPath = Files.GetTempDirectoryPath();
 
 
-                //// 2. DECRYPT FILE in tempFilePath 
-                bgw.ProgressChanged(1, lang.Decrypting);
-                decryptedInfo = FileCrypter.DecryptFile(inputFilePath, tempPath, password);
+                //// 2. DECRYPT FILE in tempFilePath
+                DecryptedInfo = FileCrypter.DecryptFile(InputFilePath, TempPath, Password, Bgw);
 
 
                 //// 3. LAUNCH DECRYPTED FILE 
-                bgw.ProgressChanged(40, lang.Opening);
-                ProcessStartInfo procStartInfo = new ProcessStartInfo(decryptedInfo.OutputPath);
+                Bgw.ProgressChanged(100, lang.Opening);
+                ProcessStartInfo procStartInfo = new ProcessStartInfo(DecryptedInfo.OutputPath);
 
                 Process fileProc = new Process
                 {
@@ -95,9 +91,9 @@ namespace MCrypt.Cryptography
                 fileProc.Start();
 
 
-                if (!decryptedInfo.IsDirectory)
+                if (!DecryptedInfo.IsDirectory)
                 {
-                    bgw.ProgressChanged(50, lang.WaitingForTheFileToExit);
+                    Bgw.ProgressChanged(-1, lang.WaitingForTheFileToExit);
                     try // Try to watch for the process()
                     {
                         fileProc.WaitForExit(); // Wait for the process to exit
@@ -108,7 +104,7 @@ namespace MCrypt.Cryptography
                     }
                     finally // If process watching failed  OR  process finished: look if the file is still in use.
                     {
-                        while (Files.IsFileUsed(decryptedInfo.OutputPath))
+                        while (Files.IsFileUsed(DecryptedInfo.OutputPath))
                         {
                             System.Threading.Thread.Sleep(1000);
                         }
@@ -116,7 +112,7 @@ namespace MCrypt.Cryptography
                 }
                 else // If it is a folder
                 {
-                    ShowCloseDialog(owner, decryptedInfo.OutputPath);
+                    ShowCloseDialog(Owner, DecryptedInfo.OutputPath);
                     // When it closes, the user wants to close the folder back.
 
                     ShellWindows _shellWindows = new ShellWindows();
@@ -132,7 +128,7 @@ namespace MCrypt.Cryptography
                         //Output.Print("ie Location URL: " + locationPath);
 
                         //this could also be used for IE windows with processType of "iexplore"
-                        if (processType.Equals("explorer") && locationPath == decryptedInfo.OutputPath)
+                        if (processType.Equals("explorer") && locationPath == DecryptedInfo.OutputPath)
                         {
                             ie.Quit();
                         }
@@ -142,14 +138,13 @@ namespace MCrypt.Cryptography
 
 
                 //// 4. ENCRYPT EDITED TEMP FILE in tempCryptedPath 
-                bgw.ProgressChanged(60, lang.EncryptingBackThe + " " + (decryptedInfo.IsDirectory? lang.folder : lang.file));
-                CrypterInfo encryptedInfo = FileCrypter.EncryptFile(decryptedInfo.OutputPath, Path.GetDirectoryName(decryptedInfo.OutputPath), password, decryptedInfo.IsDirectory); // Use same password and encrypt in same temp folder
+                CrypterInfo encryptedInfo = FileCrypter.EncryptFile(DecryptedInfo.OutputPath, Path.GetDirectoryName(DecryptedInfo.OutputPath), Password, DecryptedInfo.IsDirectory, DecryptedInfo.CompressionMode, Bgw); // Use same password and encrypt in same temp folder
 
 
                 //// 5. REPLACE ORIGINAL (inputFilePath) BY NEW (tempCryptedFile) 
-                bgw.ProgressChanged(100, lang.Finalizing);
-                File.Delete(inputFilePath);
-                File.Copy(encryptedInfo.OutputPath, inputFilePath);
+                Bgw.ProgressChanged(100, lang.Finalizing);
+                File.Delete(InputFilePath);
+                File.Copy(encryptedInfo.OutputPath, InputFilePath);
             }
             catch (WrongPasswordException ex)
             {
@@ -176,7 +171,7 @@ namespace MCrypt.Cryptography
                 //// 6. DELETE TEMP DIRECTORY 
                 try
                 {
-                    Files.OptimalDirectoryDelete(tempPath);
+                    Files.OptimalDirectoryDelete(TempPath);
                     Output.Print("Deleted temp folder.");
                 }
                 catch { }

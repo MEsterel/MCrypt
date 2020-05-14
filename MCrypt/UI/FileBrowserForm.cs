@@ -108,9 +108,8 @@ namespace MCrypt.UI
             {
                 txtFileName.Text = fileDialog.FileName;
                 txtFileName.SelectionStart = txtFileName.TextLength;
+                btnStart_Click(sender, e);
             }
-
-            btnStart_Click(sender, e);
         }
 
         private void btnBrowseDirectory_Click(object sender, EventArgs e)
@@ -127,9 +126,8 @@ namespace MCrypt.UI
             {
                 txtFileName.Text = fileDialog.FileName;
                 txtFileName.SelectionStart = txtFileName.TextLength;
+                btnStart_Click(sender, e);
             }
-
-            btnStart_Click(sender, e);
         }
 
         private void FileBrowserUI_DragEnter(object sender, DragEventArgs e)

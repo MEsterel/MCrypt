@@ -137,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cryptography\CrypterInfo.cs" />
+    <Compile Include="Tools\EnumCompressionMode.cs" />
     <Compile Include="Resources\lang.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -156,7 +157,7 @@
     <Compile Include="Exceptions\InvalidFileName.cs" />
     <Compile Include="Exceptions\NotMCryptFileException.cs" />
     <Compile Include="Exceptions\WrongPasswordException.cs" />
-    <Compile Include="Tools\DirectoryZipper.cs" />
+    <Compile Include="Tools\Zipper.cs" />
     <Compile Include="Tools\UpdateManager.cs" />
     <Compile Include="UI\SaveDirectoryUC.cs">
       <SubType>UserControl</SubType>
@@ -268,6 +269,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MCryptIcon.ico" />
+    <None Include="Resources\zip20mod.png" />
     <EmbeddedResource Include="Resources\fr\MCrypt.resources.dll" />
     <EmbeddedResource Include="Resources\fr\MUpdate.resources.dll" />
     <None Include="Resources\lock64.png" />
