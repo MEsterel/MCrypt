@@ -381,7 +381,7 @@ namespace MCrypt.Cryptography
 
                         for (int i = 0; i < batchesNumber; i++)
                         {
-                            bgw.ProgressChanged(20 + (int)(i * 60 / batchesNumber), string.Format(lang.Decrypting + " (" + lang.step + " {0} / {1})", i, batchesNumber));
+                            bgw.ProgressChanged(20 + (int)(i * 60 / batchesNumber), string.Format(lang.Decrypting + " (" + lang.step + " {0} / {1})", i + 1, batchesNumber));
                             using (MemoryStream ms = new MemoryStream())
                             {
                                 using (CryptoStream cryptoStream = new CryptoStream(ms, transform, CryptoStreamMode.Write)) // we create a cryptoStream for each batch (because it's of single use)
