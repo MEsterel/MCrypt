@@ -75,7 +75,7 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.RoyalBlue;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(126)))), ((int)(((byte)(251)))));
             this.Controls.Add(this.label1);
             this.Controls.Add(this.accessFolderlnk);
             this.Controls.Add(this.lblDecrypt);

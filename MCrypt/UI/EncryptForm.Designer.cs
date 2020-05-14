@@ -53,41 +53,35 @@
             // lblMcrypt
             // 
             resources.ApplyResources(this.lblMcrypt, "lblMcrypt");
-            this.lblMcrypt.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.lblMcrypt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(126)))), ((int)(((byte)(251)))));
             this.lblMcrypt.Name = "lblMcrypt";
-            this.toolTip1.SetToolTip(this.lblMcrypt, resources.GetString("lblMcrypt.ToolTip"));
             // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.toolTip1.SetToolTip(this.label2, resources.GetString("label2.ToolTip"));
             // 
             // passwordTxt
             // 
             resources.ApplyResources(this.passwordTxt, "passwordTxt");
             this.passwordTxt.Name = "passwordTxt";
-            this.toolTip1.SetToolTip(this.passwordTxt, resources.GetString("passwordTxt.ToolTip"));
             this.passwordTxt.UseSystemPasswordChar = true;
             // 
             // label3
             // 
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.toolTip1.SetToolTip(this.label3, resources.GetString("label3.ToolTip"));
             // 
             // rePasswordTxt
             // 
             resources.ApplyResources(this.rePasswordTxt, "rePasswordTxt");
             this.rePasswordTxt.Name = "rePasswordTxt";
-            this.toolTip1.SetToolTip(this.rePasswordTxt, resources.GetString("rePasswordTxt.ToolTip"));
             this.rePasswordTxt.UseSystemPasswordChar = true;
             // 
             // encryptBtn
             // 
             resources.ApplyResources(this.encryptBtn, "encryptBtn");
             this.encryptBtn.Name = "encryptBtn";
-            this.toolTip1.SetToolTip(this.encryptBtn, resources.GetString("encryptBtn.ToolTip"));
             this.encryptBtn.UseVisualStyleBackColor = true;
             this.encryptBtn.Click += new System.EventHandler(this.btnEncrypt_Click);
             // 
@@ -95,7 +89,6 @@
             // 
             resources.ApplyResources(this.lblEncrypt, "lblEncrypt");
             this.lblEncrypt.Name = "lblEncrypt";
-            this.toolTip1.SetToolTip(this.lblEncrypt, resources.GetString("lblEncrypt.ToolTip"));
             // 
             // metroProgressSpinner1
             // 
@@ -103,7 +96,6 @@
             this.metroProgressSpinner1.Maximum = 100;
             this.metroProgressSpinner1.Name = "metroProgressSpinner1";
             this.metroProgressSpinner1.Speed = 4F;
-            this.toolTip1.SetToolTip(this.metroProgressSpinner1, resources.GetString("metroProgressSpinner1.ToolTip"));
             this.metroProgressSpinner1.UseSelectable = true;
             this.metroProgressSpinner1.Value = 33;
             // 
@@ -120,43 +112,38 @@
             // statusLbl
             // 
             resources.ApplyResources(this.statusLbl, "statusLbl");
-            this.statusLbl.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.statusLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.statusLbl.Name = "statusLbl";
-            this.toolTip1.SetToolTip(this.statusLbl, resources.GetString("statusLbl.ToolTip"));
             // 
             // pbKey
             // 
-            resources.ApplyResources(this.pbKey, "pbKey");
             this.pbKey.Image = global::MCrypt.Properties.Resources.key20;
+            resources.ApplyResources(this.pbKey, "pbKey");
             this.pbKey.Name = "pbKey";
             this.pbKey.TabStop = false;
-            this.toolTip1.SetToolTip(this.pbKey, resources.GetString("pbKey.ToolTip"));
             // 
             // compressionLbl
             // 
             resources.ApplyResources(this.compressionLbl, "compressionLbl");
             this.compressionLbl.Name = "compressionLbl";
-            this.toolTip1.SetToolTip(this.compressionLbl, resources.GetString("compressionLbl.ToolTip"));
             // 
             // compressionCmb
             // 
-            resources.ApplyResources(this.compressionCmb, "compressionCmb");
             this.compressionCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.compressionCmb.FormattingEnabled = true;
             this.compressionCmb.Items.AddRange(new object[] {
             resources.GetString("compressionCmb.Items"),
             resources.GetString("compressionCmb.Items1"),
             resources.GetString("compressionCmb.Items2")});
+            resources.ApplyResources(this.compressionCmb, "compressionCmb");
             this.compressionCmb.Name = "compressionCmb";
-            this.toolTip1.SetToolTip(this.compressionCmb, resources.GetString("compressionCmb.ToolTip"));
             // 
             // pbZip
             // 
-            resources.ApplyResources(this.pbZip, "pbZip");
             this.pbZip.Image = global::MCrypt.Properties.Resources.zip20mod;
+            resources.ApplyResources(this.pbZip, "pbZip");
             this.pbZip.Name = "pbZip";
             this.pbZip.TabStop = false;
-            this.toolTip1.SetToolTip(this.pbZip, resources.GetString("pbZip.ToolTip"));
             // 
             // saveDirectoryUC
             // 
@@ -164,7 +151,6 @@
             this.saveDirectoryUC.BackColor = System.Drawing.Color.White;
             this.saveDirectoryUC.InitialDirectory = null;
             this.saveDirectoryUC.Name = "saveDirectoryUC";
-            this.toolTip1.SetToolTip(this.saveDirectoryUC, resources.GetString("saveDirectoryUC.ToolTip"));
             // 
             // EncryptForm
             // 
@@ -190,7 +176,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EncryptForm";
-            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EncryptUI_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pbKey)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbZip)).EndInit();

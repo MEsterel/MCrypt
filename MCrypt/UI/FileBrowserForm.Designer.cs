@@ -48,32 +48,29 @@
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
-            this.label1.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(126)))), ((int)(((byte)(251)))));
             this.label1.Name = "label1";
-            this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.ForeColor = System.Drawing.SystemColors.WindowText;
             this.label2.Name = "label2";
-            this.toolTip1.SetToolTip(this.label2, resources.GetString("label2.ToolTip"));
             // 
             // label3
             // 
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.toolTip1.SetToolTip(this.label3, resources.GetString("label3.ToolTip"));
             // 
             // comboBoxMode
             // 
-            resources.ApplyResources(this.comboBoxMode, "comboBoxMode");
             this.comboBoxMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMode.FormattingEnabled = true;
             this.comboBoxMode.Items.AddRange(new object[] {
             resources.GetString("comboBoxMode.Items"),
             resources.GetString("comboBoxMode.Items1"),
             resources.GetString("comboBoxMode.Items2")});
+            resources.ApplyResources(this.comboBoxMode, "comboBoxMode");
             this.comboBoxMode.Name = "comboBoxMode";
             this.toolTip1.SetToolTip(this.comboBoxMode, resources.GetString("comboBoxMode.ToolTip"));
             // 
@@ -81,13 +78,11 @@
             // 
             resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
-            this.toolTip1.SetToolTip(this.label5, resources.GetString("label5.ToolTip"));
             // 
             // txtFileName
             // 
             resources.ApplyResources(this.txtFileName, "txtFileName");
             this.txtFileName.Name = "txtFileName";
-            this.toolTip1.SetToolTip(this.txtFileName, resources.GetString("txtFileName.ToolTip"));
             this.txtFileName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtFileName_MouseDoubleClick);
             // 
             // btnStart
@@ -110,8 +105,8 @@
             // 
             // btnBrowseFile
             // 
-            resources.ApplyResources(this.btnBrowseFile, "btnBrowseFile");
             this.btnBrowseFile.Image = global::MCrypt.Properties.Resources.file20;
+            resources.ApplyResources(this.btnBrowseFile, "btnBrowseFile");
             this.btnBrowseFile.Name = "btnBrowseFile";
             this.toolTip1.SetToolTip(this.btnBrowseFile, resources.GetString("btnBrowseFile.ToolTip"));
             this.btnBrowseFile.UseVisualStyleBackColor = true;
@@ -119,8 +114,8 @@
             // 
             // btnBrowseDirectory
             // 
-            resources.ApplyResources(this.btnBrowseDirectory, "btnBrowseDirectory");
             this.btnBrowseDirectory.Image = global::MCrypt.Properties.Resources.folder20;
+            resources.ApplyResources(this.btnBrowseDirectory, "btnBrowseDirectory");
             this.btnBrowseDirectory.Name = "btnBrowseDirectory";
             this.toolTip1.SetToolTip(this.btnBrowseDirectory, resources.GetString("btnBrowseDirectory.ToolTip"));
             this.btnBrowseDirectory.UseVisualStyleBackColor = true;
@@ -128,16 +123,15 @@
             // 
             // pictureBox1
             // 
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Image = global::MCrypt.Properties.Resources.search20;
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
-            this.toolTip1.SetToolTip(this.pictureBox1, resources.GetString("pictureBox1.ToolTip"));
             // 
             // FileBrowserForm
             // 
-            resources.ApplyResources(this, "$this");
             this.AllowDrop = true;
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.btnBrowseDirectory);
@@ -155,7 +149,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FileBrowserForm";
-            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.FileBrowserUI_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.FileBrowserUI_DragEnter);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

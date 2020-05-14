@@ -57,7 +57,6 @@
             this.metroProgressSpinner1.Maximum = 100;
             this.metroProgressSpinner1.Name = "metroProgressSpinner1";
             this.metroProgressSpinner1.Speed = 4F;
-            this.toolTip1.SetToolTip(this.metroProgressSpinner1, resources.GetString("metroProgressSpinner1.ToolTip"));
             this.metroProgressSpinner1.UseSelectable = true;
             this.metroProgressSpinner1.Value = 33;
             // 
@@ -65,13 +64,11 @@
             // 
             resources.ApplyResources(this.lblDecrypt, "lblDecrypt");
             this.lblDecrypt.Name = "lblDecrypt";
-            this.toolTip1.SetToolTip(this.lblDecrypt, resources.GetString("lblDecrypt.ToolTip"));
             // 
             // decryptBtn
             // 
             resources.ApplyResources(this.decryptBtn, "decryptBtn");
             this.decryptBtn.Name = "decryptBtn";
-            this.toolTip1.SetToolTip(this.decryptBtn, resources.GetString("decryptBtn.ToolTip"));
             this.decryptBtn.UseVisualStyleBackColor = true;
             this.decryptBtn.Click += new System.EventHandler(this.btnDecrypt_Click);
             // 
@@ -79,21 +76,18 @@
             // 
             resources.ApplyResources(this.passwordTxt, "passwordTxt");
             this.passwordTxt.Name = "passwordTxt";
-            this.toolTip1.SetToolTip(this.passwordTxt, resources.GetString("passwordTxt.ToolTip"));
             this.passwordTxt.UseSystemPasswordChar = true;
             // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.toolTip1.SetToolTip(this.label2, resources.GetString("label2.ToolTip"));
             // 
             // lblMcrypt
             // 
             resources.ApplyResources(this.lblMcrypt, "lblMcrypt");
-            this.lblMcrypt.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.lblMcrypt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(126)))), ((int)(((byte)(251)))));
             this.lblMcrypt.Name = "lblMcrypt";
-            this.toolTip1.SetToolTip(this.lblMcrypt, resources.GetString("lblMcrypt.ToolTip"));
             // 
             // aboutLink
             // 
@@ -113,21 +107,18 @@
             this.panelMode.Controls.Add(this.openTmpRdoBtn);
             this.panelMode.Controls.Add(this.label3);
             this.panelMode.Name = "panelMode";
-            this.toolTip1.SetToolTip(this.panelMode, resources.GetString("panelMode.ToolTip"));
             // 
             // pictureBox2
             // 
             resources.ApplyResources(this.pictureBox2, "pictureBox2");
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.TabStop = false;
-            this.toolTip1.SetToolTip(this.pictureBox2, resources.GetString("pictureBox2.ToolTip"));
             // 
             // decryptAndSaveRdoBtn
             // 
             resources.ApplyResources(this.decryptAndSaveRdoBtn, "decryptAndSaveRdoBtn");
             this.decryptAndSaveRdoBtn.Name = "decryptAndSaveRdoBtn";
             this.decryptAndSaveRdoBtn.TabStop = true;
-            this.toolTip1.SetToolTip(this.decryptAndSaveRdoBtn, resources.GetString("decryptAndSaveRdoBtn.ToolTip"));
             this.decryptAndSaveRdoBtn.UseVisualStyleBackColor = true;
             // 
             // openTmpRdoBtn
@@ -135,7 +126,6 @@
             resources.ApplyResources(this.openTmpRdoBtn, "openTmpRdoBtn");
             this.openTmpRdoBtn.Name = "openTmpRdoBtn";
             this.openTmpRdoBtn.TabStop = true;
-            this.toolTip1.SetToolTip(this.openTmpRdoBtn, resources.GetString("openTmpRdoBtn.ToolTip"));
             this.openTmpRdoBtn.UseVisualStyleBackColor = true;
             this.openTmpRdoBtn.CheckedChanged += new System.EventHandler(this.rdobtnOpenTemp_CheckedChanged);
             // 
@@ -143,22 +133,19 @@
             // 
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.toolTip1.SetToolTip(this.label3, resources.GetString("label3.ToolTip"));
             // 
             // keyPbx
             // 
-            resources.ApplyResources(this.keyPbx, "keyPbx");
             this.keyPbx.Image = global::MCrypt.Properties.Resources.key20;
+            resources.ApplyResources(this.keyPbx, "keyPbx");
             this.keyPbx.Name = "keyPbx";
             this.keyPbx.TabStop = false;
-            this.toolTip1.SetToolTip(this.keyPbx, resources.GetString("keyPbx.ToolTip"));
             // 
             // statusLbl
             // 
             resources.ApplyResources(this.statusLbl, "statusLbl");
-            this.statusLbl.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.statusLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.statusLbl.Name = "statusLbl";
-            this.toolTip1.SetToolTip(this.statusLbl, resources.GetString("statusLbl.ToolTip"));
             // 
             // saveDirectoryUC
             // 
@@ -166,7 +153,6 @@
             this.saveDirectoryUC.BackColor = System.Drawing.Color.White;
             this.saveDirectoryUC.InitialDirectory = null;
             this.saveDirectoryUC.Name = "saveDirectoryUC";
-            this.toolTip1.SetToolTip(this.saveDirectoryUC, resources.GetString("saveDirectoryUC.ToolTip"));
             // 
             // DecryptForm
             // 
@@ -187,7 +173,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DecryptForm";
-            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DecryptUI_FormClosing);
             this.panelMode.ResumeLayout(false);
             this.panelMode.PerformLayout();

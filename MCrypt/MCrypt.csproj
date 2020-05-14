@@ -268,7 +268,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MCryptIcon.ico" />
     <None Include="Resources\zip20mod.png" />
     <EmbeddedResource Include="Resources\fr\MCrypt.resources.dll" />
     <EmbeddedResource Include="Resources\fr\MUpdate.resources.dll" />
@@ -323,6 +322,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MCryptIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -43,7 +43,7 @@
             // lblMCrypt
             // 
             resources.ApplyResources(this.lblMCrypt, "lblMCrypt");
-            this.lblMCrypt.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.lblMCrypt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(126)))), ((int)(((byte)(251)))));
             this.lblMCrypt.Name = "lblMCrypt";
             // 
             // lblVersion
@@ -76,6 +76,7 @@
             // okBtn
             // 
             resources.ApplyResources(this.okBtn, "okBtn");
+            this.okBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.okBtn.Name = "okBtn";
             this.okBtn.UseVisualStyleBackColor = true;
             this.okBtn.Click += new System.EventHandler(this.okBtn_Click);
@@ -89,9 +90,11 @@
             // 
             // AboutForm
             // 
+            this.AcceptButton = this.okBtn;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.CancelButton = this.okBtn;
             this.Controls.Add(this.button2);
             this.Controls.Add(this.okBtn);
             this.Controls.Add(this.lblDescription);

@@ -130,6 +130,9 @@
   <data name="label3.Text" xml:space="preserve">
     <value>Confirmer le mot de passe :</value>
   </data>
+  <data name="encryptBtn.Text" xml:space="preserve">
+    <value>&amp;Crypter</value>
+  </data>
   <data name="lblEncrypt.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 30</value>
   </data>
